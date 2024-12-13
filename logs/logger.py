@@ -1,7 +1,6 @@
 """
 LogManager Module
 
-이 모듈은 A3C 주식 거래 프로젝트를 위한 로그 관리 클래스를 제공합니다.
 싱글톤 패턴으로 설계되어 로그 설정을 중앙에서 관리하며, 다음과 같은 주요 기능을 포함합니다:
 - 로그 파일 생성 및 관리
 - 컬러 로그 포맷 지원
@@ -33,7 +32,7 @@ class LogManager:
             cls._instance = super(LogManager, cls).__new__(cls, *args, **kwargs)
         return cls._instance
     
-    def __init__(self, directory='D:\\ICTRLT\\utils\\Log', max_files=10):
+    def __init__(self, directory=r'C:\Users\User\Desktop\python\auto\python\NikkePCAuto\logs\log', max_files=10):
         """
         LogManager 초기화
 
@@ -56,7 +55,7 @@ class LogManager:
 
     def _init_logger(self):
         """ 로거 초기화 """
-        logger = logging.getLogger('RLTrading')
+        logger = logging.getLogger('Nikke')
 
         log_colors_config = {
             'DEBUG': 'cyan',
