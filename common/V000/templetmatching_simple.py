@@ -1,26 +1,53 @@
 import cv2
-import numpy as np
+import sys
 import os
-from utils import capture_screen_to_temp 
+import numpy as np
+
+# 프로젝트 루트 경로 추가
+current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+project_root = os.path.abspath(os.path.join(current_file, "..", "..", ".."))
+sys.path.append(project_root)
+
+from manage import PathManager
+
+path_manager = PathManager()
+sys.path.append(path_manager.get_path("utils"))
+
+try:
+    from utils import capture_screen_to_temp
+    print("임포트 성공")
+except Exception as e:
+    print(f"임포트 실패: {e}")
+
 
 class TemplateMatcher:
     """
+    Singleton
+
     TemplateMatcher Singleton Class: Matches a template image against the current screen.
     """
     _instance = None
 
+    #
     def __new__(cls, *args, **kwargs):
+        """
+        __new__는 클래스 인스턴스가 생성될 때 호출되는 메서드
+        """
         if not cls._instance:
-            cls._instance = super(TemplateMatcher, cls).__new__(cls)
+            cls._instance = super(TemplateMatcher, cls).__new__(cls) # __new__ 메서드를 통해 클래스의 단일 인스턴스를 보장.
         return cls._instance
 
     def __init__(self):
-        # 매칭 전략을 저장하는 변수
+        """
+        매칭 전략을 저장하는 변수
+        """
         self.matching_strategy = None
 
     def set_strategy(self, strategy):
         """
         템플릿 매칭에 사용할 전략을 설정합니다.
+
+        V000에서는 opencv grayscale 전략만 있음
         """
         self.matching_strategy = strategy
 
@@ -39,10 +66,19 @@ class TemplateMatcher:
 
 class ExactMatchStrategy:
     """
-    정확한 템플릿 매칭을 수행하는 전략 클래스.
+    정확한(단순) 템플릿 매칭을 수행하는 전략 클래스.
     """
     def match(self, screen_image, template_image):
+        """
+        템플릿 매칭을 수행합니다.
 
+        Args:
+            screen_image (str or numpy.ndarray): 화면 이미지 경로 또는 numpy 배열.
+            template_image (str or numpy.ndarray): 템플릿 이미지 경로 또는 numpy 배열.
+
+        Returns:
+            tuple: (is_match: bool, top_left: tuple or None) 매칭 여부와 매칭 좌표.
+        """
         if screen_image is None:
             raise ValueError(f"Screen image could not be loaded from {screen_image}")
         if template_image is None:
@@ -85,7 +121,7 @@ if __name__ == "__main__":
     captured_screen_path = capture_screen_to_temp()
 
     # 템플릿 매칭 수행 (정확한 경로 사용)
-    template_path = os.path.join(os.getcwd(), "assets", "test", "test.png")  # 현재 폴더 기준 절대 경로 생성
+    template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png" # 절대 경로 생성
 
     img = cv2.imread(captured_screen_path)
 
