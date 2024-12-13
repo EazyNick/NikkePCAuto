@@ -93,16 +93,13 @@ if __name__ == "__main__":
     # 템플릿 매칭 수행 (정확한 경로 사용)
     template_path = os.path.join(os.getcwd(), "assets", "test", "test.png")  # 현재 폴더 기준 절대 경로 생성
 
-    img = cv2.imread(captured_screen_path)
+    try:
+        # 템플릿 매칭 수행
+        is_match, location = matcher.match_template(captured_screen_path, template_path)
 
-    if captured_screen_path is None:
-        raise ValueError("Screen image could not be loaded.")
-    if template_path is None:
-        raise ValueError("Template image could not be loaded.")
-
-    is_match, location = matcher.match_template(captured_screen_path, template_path)
-
-    if is_match:
-        print(f"Template matched at location: {location}")
-    else:
-        print("Template did not match.")
+        if is_match:
+            print(f"Template matched at location: {location}")
+        else:
+            print("Template did not match.")
+    except ValueError as e:
+        print(f"Error during matching: {e}")
