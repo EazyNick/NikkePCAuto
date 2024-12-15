@@ -10,7 +10,7 @@ class PathManager:
 
         # 주요 폴더 경로 설정
         self.folders = {
-            "assets_Login": os.path.join(self.project_root, "assets", "Login"),
+            "assets_login": os.path.join(self.project_root, "assets", "login"),
             "assets_temp": os.path.join(self.project_root, "assets", "temp"),
             "assets_test": os.path.join(self.project_root, "assets", "test"),
             "common": os.path.join(self.project_root, "common"),

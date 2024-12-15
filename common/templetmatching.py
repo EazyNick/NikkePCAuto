@@ -5,7 +5,7 @@ import numpy as np
 
 try:
     sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-    from utils import capture_screen_to_temp 
+    from utils import capture_screen 
 except:
     print("임포트 실패")
 
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     matcher.set_strategy(ExactMatchStrategy())
 
     # 현재 화면 캡처
-    captured_screen_path = capture_screen_to_temp()
+    captured_screen_path = capture_screen()
 
     # 템플릿 매칭 수행 (정확한 경로 사용)
     template_path = os.path.join(os.getcwd(), "assets", "test", "test.png")  # 현재 폴더 기준 절대 경로 생성

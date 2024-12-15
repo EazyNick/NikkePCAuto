@@ -2,7 +2,7 @@ import pyautogui
 import os
 from datetime import datetime
 
-def capture_screen_to_temp():
+def capture_screen():
     """
     현재 화면을 캡처하여 지정된 폴더에 저장합니다.
     파일 이름은 현재 시간(년월일_시분초)으로 저장됩니다.
@@ -53,4 +53,4 @@ def clean_up_temp_files(directory, max_files=30):
 
 # 테스트 실행
 if __name__ == "__main__":
-    capture_screen_to_temp()
+    capture_screen()

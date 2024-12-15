@@ -9,11 +9,11 @@ sys.path.append(project_root)
 from manage import PathManager 
 
 from common.V000 import matcher 
-from utils import capture_screen_to_temp
+from utils import capture_screen
 
 def main():
     # 현재 화면 캡처
-    captured_screen_path = capture_screen_to_temp()
+    captured_screen_path = capture_screen()
 
     # 템플릿 매칭 수행 (정확한 경로 사용)
     template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png" # 절대 경로 생성

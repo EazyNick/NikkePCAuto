@@ -58,14 +58,14 @@ if __name__ == "__main__":
     sys.path.append(project_root)
 
     from common.V000 import TemplateMatcher, ExactMatchStrategy
-    from utils import capture_screen_to_temp
+    from utils import capture_screen
 
     # TemplateMatcher 인스턴스 생성
     matcher = TemplateMatcher()
     matcher.set_strategy(ExactMatchStrategy())
 
     # 현재 화면 캡처 및 템플릿 경로 설정
-    captured_screen_path = capture_screen_to_temp()
+    captured_screen_path = capture_screen()
     template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png"
 
     # 템플릿 매칭 수행
