@@ -1,1 +1,1 @@
-from .screen_capture import capture_screen
+from .screen_capture import capture_screen, click_and_save_with_highlight

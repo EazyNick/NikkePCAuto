@@ -8,8 +8,17 @@ sys.path.append(project_root)
 
 from manage import PathManager 
 
-from common.V000 import matcher 
-from utils import capture_screen
+path_manager = PathManager()
+sys.path.append(path_manager.get_path("utils"))
+sys.path.append(path_manager.get_path("logs"))
+sys.path.append(path_manager.get_path("common"))
+
+try:
+    from common.V000 import matcher 
+    from utils import capture_screen
+    from logs import log_manager
+except Exception as e:
+    log_manager.logger.info(f"임포트 실패: {e}")
 
 def main():
     # 현재 화면 캡처
@@ -23,11 +32,11 @@ def main():
         is_match, location = matcher.match_template(captured_screen_path, template_path)
 
         if is_match:
-            print(f"Template matched at location: {location}")
+            log_manager.logger.info(f"Template matched at location: {location}")
         else:
-            print("Template did not match.")
+            log_manager.logger.info("Template did not match.")
     except ValueError as e:
-        print(f"Error during matching: {e}")
+        log_manager.logger.info(f"Error during matching: {e}")
 
 
 

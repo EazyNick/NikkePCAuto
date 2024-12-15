@@ -1,5 +1,6 @@
 from common.V000 import TemplateMatcher, ExactMatchStrategy
 from utils import capture_screen
+from logs import log_manager
 
 def main():
     
@@ -33,6 +34,6 @@ if __name__ == "__main__":
     is_match, location = matcher.match_template(captured_screen_path, template_path)
 
     if is_match:
-        print(f"Template matched at location: {location}")
+        log_manager.logger.info(f"Template matched at location: {location}")
     else:
-        print("Template did not match.")
+        log_manager.logger.info("Template did not match.")

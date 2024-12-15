@@ -3,6 +3,22 @@ import os
 from datetime import datetime
 import cv2
 import numpy as np
+import sys
+
+# 프로젝트 루트 경로 추가
+current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
+sys.path.append(project_root)
+
+from manage import PathManager
+
+path_manager = PathManager()
+sys.path.append(path_manager.get_path("logs"))
+
+try:
+    from logs import log_manager
+except Exception as e:
+    log_manager.logger.info(f"임포트 실패: {e}")
 
 def capture_screen():
     """
@@ -24,34 +40,12 @@ def capture_screen():
 
     # 캡처한 이미지를 저장
     screenshot.save(file_path)
-    print(f"화면 캡처가 저장되었습니다: {file_path}")
+    log_manager.logger.info(f"화면 캡처가 저장되었습니다: {file_path}")
 
     # 저장된 파일이 30장 이상일 경우 삭제
     clean_up_temp_files(temp_dir)
     
     return file_path
-
-def clean_up_temp_files(directory, max_files=30):
-    """
-    지정된 디렉토리 내 파일 개수가 max_files를 초과하면 모든 파일을 삭제합니다.
-
-    Args:
-        directory (str): 디렉토리 경로.
-        max_files (int): 최대 허용 파일 개수. 초과 시 모든 파일 삭제.
-    """
-    try:
-        # 디렉토리 내 파일 목록 가져오기
-        files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
-
-        # 파일 개수가 max_files를 초과하면 삭제
-        if len(files) > max_files:
-            for file in files:
-                os.remove(file)
-            print(f"{len(files)}개의 파일이 삭제되었습니다. 디렉토리: {directory}")
-        else:
-            print(f"현재 파일 개수: {len(files)}. 삭제 작업은 수행되지 않았습니다.")
-    except Exception as e:
-        print(f"파일 정리 중 오류 발생: {e}")
 
 def click_and_save_with_highlight(coords):
     """
@@ -87,9 +81,32 @@ def click_and_save_with_highlight(coords):
 
     # 강조된 이미지를 저장
     cv2.imwrite(new_file_path, image)
-    print(f"강조된 스크린샷이 저장되었습니다: {new_file_path}")
+    log_manager.logger.info(f"강조된 스크린샷이 저장되었습니다: {new_file_path}")
 
     return new_file_path
+
+def clean_up_temp_files(directory, max_files=100):
+    """
+    지정된 디렉토리 내 파일 개수가 max_files를 초과하면 모든 파일을 삭제합니다.
+
+    Args:
+        directory (str): 디렉토리 경로.
+        max_files (int): 최대 허용 파일 개수. 초과 시 모든 파일 삭제.
+    """
+    try:
+        # 디렉토리 내 파일 목록 가져오기
+        files = [os.path.join(directory, f) for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
+
+        # 파일 개수가 max_files를 초과하면 삭제
+        if len(files) > max_files:
+            for file in files:
+                os.remove(file)
+            log_manager.logger.info(f"{len(files)}개의 파일이 삭제되었습니다. 디렉토리: {directory}")
+        else:
+            log_manager.logger.info(f"현재 파일 개수: {len(files)}. 삭제 작업은 수행되지 않았습니다.")
+    except Exception as e:
+        log_manager.logger.info(f"파일 정리 중 오류 발생: {e}")
+
 
 # 테스트 실행
 if __name__ == "__main__":

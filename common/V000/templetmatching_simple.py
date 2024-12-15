@@ -12,12 +12,13 @@ from manage import PathManager
 
 path_manager = PathManager()
 sys.path.append(path_manager.get_path("utils"))
+sys.path.append(path_manager.get_path("logs"))
 
 try:
     from utils import capture_screen
-    print("임포트 성공")
+    from logs import log_manager
 except Exception as e:
-    print(f"임포트 실패: {e}")
+    log_manager.logger.info(f"임포트 실패: {e}")
 
 
 class TemplateMatcher:
@@ -128,8 +129,8 @@ if __name__ == "__main__":
         is_match, location = matcher.match_template(captured_screen_path, template_path)
 
         if is_match:
-            print(f"Template matched at location: {location}")
+            log_manager.logger.info(f"Template matched at location: {location}")
         else:
-            print("Template did not match.")
+            log_manager.logger.info("Template did not match.")
     except ValueError as e:
-        print(f"Error during matching: {e}")
+        log_manager.logger.info(f"Error during matching: {e}")

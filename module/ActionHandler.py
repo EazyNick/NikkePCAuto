@@ -1,5 +1,25 @@
 import pyautogui
+import os
+import sys
 
+# 프로젝트 루트 경로 추가
+current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
+sys.path.append(project_root)
+
+from manage import PathManager
+
+path_manager = PathManager()
+sys.path.append(path_manager.get_path("utils"))
+sys.path.append(path_manager.get_path("logs"))
+sys.path.append(path_manager.get_path("common"))
+
+try:
+    from utils import capture_screen
+    from common.V000 import TemplateMatcher, ExactMatchStrategy
+    from logs import log_manager
+except Exception as e:
+    log_manager.logger.info(f"임포트 실패: {e}")
 
 class ActionHandler:
     """
@@ -22,7 +42,7 @@ class ActionHandler:
             button (str): 클릭할 버튼 ("left", "right", "middle").
         """
         pyautogui.click(x=x, y=y, button=button)
-        print(f"Clicked at ({x}, {y}) with button {button}")
+        log_manager.logger.info(f"Clicked at ({x}, {y}) with button {button}")
 
     def move_to(self, x, y, duration=0.5):
         """
@@ -34,7 +54,7 @@ class ActionHandler:
             duration (float): 이동 시간 (초 단위).
         """
         pyautogui.moveTo(x, y, duration=duration)
-        print(f"Moved to ({x}, {y}) in {duration} seconds")
+        log_manager.logger.info(f"Moved to ({x}, {y}) in {duration} seconds")
 
     def drag_to(self, x, y, duration=0.5, button="left"):
         """
@@ -47,19 +67,9 @@ class ActionHandler:
             button (str): 드래그할 버튼 ("left", "right", "middle").
         """
         pyautogui.dragTo(x, y, duration=duration, button=button)
-        print(f"Dragged to ({x}, {y}) in {duration} seconds with button {button}")
+        log_manager.logger.info(f"Dragged to ({x}, {y}) in {duration} seconds with button {button}")
 
 if __name__ == "__main__":
-    import os
-    import sys
-    # 프로젝트 루트 경로 추가
-    current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
-    project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
-    sys.path.append(project_root)
-
-    from common.V000 import TemplateMatcher, ExactMatchStrategy
-    from utils import capture_screen
-
     # TemplateMatcher 인스턴스 생성
     matcher = TemplateMatcher()
     matcher.set_strategy(ExactMatchStrategy())
@@ -72,7 +82,7 @@ if __name__ == "__main__":
     is_match, location = matcher.match_template(captured_screen_path, template_path)
 
     if is_match:
-        print(f"Template matched at location: {location}")
+        log_manager.logger.info(f"Template matched at location: {location}")
 
         # ActionHandler 인스턴스 생성
         action_handler = ActionHandler()
@@ -86,5 +96,5 @@ if __name__ == "__main__":
         # 드래그 예시
         action_handler.drag_to(x=location[0] + 200, y=location[1] + 200)
     else:
-        print("Template did not match.")
+        log_manager.logger.info("Template did not match.")
 

@@ -3,11 +3,22 @@ import sys
 import os
 import numpy as np
 
+# 프로젝트 루트 경로 추가
+current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
+sys.path.append(project_root)
+
+from manage import PathManager
+
+path_manager = PathManager()
+sys.path.append(path_manager.get_path("utils"))
+sys.path.append(path_manager.get_path("logs"))
+
 try:
-    sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
-    from utils import capture_screen 
-except:
-    print("임포트 실패")
+    from utils import capture_screen
+    from logs import log_manager
+except Exception as e:
+    log_manager.logger.info(f"임포트 실패: {e}")
 
 class TemplateMatcher:
     """
@@ -98,8 +109,8 @@ if __name__ == "__main__":
         is_match, location = matcher.match_template(captured_screen_path, template_path)
 
         if is_match:
-            print(f"Template matched at location: {location}")
+            log_manager.logger.info(f"Template matched at location: {location}")
         else:
-            print("Template did not match.")
+            log_manager.logger.info("Template did not match.")
     except ValueError as e:
-        print(f"Error during matching: {e}")
+        log_manager.logger.info(f"Error during matching: {e}")
