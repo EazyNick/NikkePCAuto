@@ -1,6 +1,8 @@
 import pyautogui
 import os
 from datetime import datetime
+import cv2
+import numpy as np
 
 def capture_screen():
     """
@@ -51,6 +53,46 @@ def clean_up_temp_files(directory, max_files=30):
     except Exception as e:
         print(f"파일 정리 중 오류 발생: {e}")
 
+def click_and_save_with_highlight(coords):
+    """
+    현재 화면을 다시 캡처하여 좌표를 클릭한 위치를 강조 표시하고, 저장합니다.
+
+    Args:
+        coords (tuple): (x, y) 클릭 좌표.
+
+    Returns:
+        str: 강조 표시된 새 스크린샷의 파일 경로.
+    """
+    # 현재 화면 캡처
+    base_dir = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto"
+    temp_dir = os.path.join(base_dir, "assets", "temp")
+    os.makedirs(temp_dir, exist_ok=True)  # 디렉토리가 없으면 생성
+
+    screenshot = pyautogui.screenshot()
+
+    # 이미지를 OpenCV 형식으로 변환
+    image = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+
+    # 클릭 좌표 강조 표시 (십자 표시)
+    x, y = coords
+    height, width, _ = image.shape
+    # 가로 선 그리기
+    cv2.line(image, (0, y), (width, y), color=(0, 0, 255), thickness=2)
+    # 세로 선 그리기
+    cv2.line(image, (x, 0), (x, height), color=(0, 0, 255), thickness=2)
+
+    # 새 파일 이름 설정
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    new_file_path = os.path.join(temp_dir, f"highlighted_{timestamp}.png")
+
+    # 강조된 이미지를 저장
+    cv2.imwrite(new_file_path, image)
+    print(f"강조된 스크린샷이 저장되었습니다: {new_file_path}")
+
+    return new_file_path
+
 # 테스트 실행
 if __name__ == "__main__":
     capture_screen()
+    coords = (100, 200)  # 테스트용 좌표
+    click_and_save_with_highlight(coords)
