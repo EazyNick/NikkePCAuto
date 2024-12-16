@@ -81,7 +81,7 @@ def click_and_save_with_highlight(coords):
 
     # 강조된 이미지를 저장
     cv2.imwrite(new_file_path, image)
-    log_manager.logger.info(f"강조된 스크린샷이 저장되었습니다: {new_file_path}")
+    log_manager.logger.info(f"좌표가 지정된 스크린샷이 저장되었습니다: {new_file_path}")
 
     return new_file_path
 

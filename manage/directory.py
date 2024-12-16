@@ -19,6 +19,7 @@ class PathManager:
             "git": os.path.join(self.project_root, "git"),
             "logs": os.path.join(self.project_root, "logs"),  # 로그 폴더가 필요한 경우
             "manage": os.path.join(self.project_root, "manage"),
+            "module": os.path.join(self.project_root, "module"),
             "utils": os.path.join(self.project_root, "utils"),
         }
 

@@ -12,11 +12,13 @@ path_manager = PathManager()
 sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("logs"))
 sys.path.append(path_manager.get_path("common"))
+sys.path.append(path_manager.get_path("module"))
 
 try:
     from common.V000 import matcher 
     from utils import capture_screen
     from logs import log_manager
+    from click_image import ScreenHandler
 except Exception as e:
     log_manager.logger.info(f"임포트 실패: {e}")
 

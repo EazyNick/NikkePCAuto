@@ -32,16 +32,18 @@ class LogManager:
             cls._instance = super(LogManager, cls).__new__(cls, *args, **kwargs)
         return cls._instance
     
-    def __init__(self, directory=r'C:\Users\User\Desktop\python\auto\python\NikkePCAuto\logs\log', max_files=10):
+    def __init__(self, directory=r'C:\Users\User\Desktop\python\auto\python\NikkePCAuto\logs\log', max_files=10, max_file_size=10 * 1024 * 1024):
         """
         LogManager 초기화
 
         Args:
             directory (str): 로그 파일을 저장할 디렉토리
             max_files (int): 유지할 최대 로그 파일 개수
+            max_file_size (int): 단일 로그 파일의 최대 크기 (바이트 단위)
         """
         if not hasattr(self, 'initialized'):  # 이 인스턴스가 초기화되었는지 확인
-            self.directory = directory
+            self.directory = os.path.join(os.path.dirname(__file__), "log") or directory
+            print(self.directory)
             self.max_files = max_files
             self._timestamp = self._init_timestamp()
             self.logger = self._init_logger()
