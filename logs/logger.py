@@ -46,6 +46,7 @@ class LogManager:
             self.max_files = max_files
             self._timestamp = self._init_timestamp()
             self.logger = self._init_logger()
+            self._bind_hr_to_logger()
             self.clean_up_logs()
             self.initialized = True
 
@@ -99,6 +100,26 @@ class LogManager:
         logger.debug('Logger initialized')
 
         return logger
+
+    def hr(self, message="", level=1):
+        """
+        구분선을 출력하는 메서드.
+
+        Args:
+            message (str): 구분선 위에 출력할 메시지 (기본값: 빈 문자열)
+            level (int): 구분선 길이 조정 (기본값: 1)
+        """
+        line = "=" * (level * 20)  # 구분선 길이 설정
+        if message:
+            self.logger.info(f"\n{line}\n{message}\n{line}")
+        else:
+            self.logger.info(f"\n{line}")
+
+    def _bind_hr_to_logger(self):
+        """
+        hr 메서드를 logger 객체에 동적으로 추가합니다.
+        """
+        self.logger.hr = self.hr  # logger 객체에 hr 메서드 바인딩
 
     def get_timestamp(self) -> str:
         """ 시작 타임스탬프 반환 """
