@@ -42,12 +42,13 @@ class ScreenHandler:
             self.initialized = True  # 초기화 완료 상태
             log_manager.logger.debug("ScreenHandler initialized")
 
-    def process(self, template_path):
+    def process(self, template_path, double_click=False):
         """
-        화면 캡처 → 템플릿 매칭 → 클릭 → 강조된 이미지 저장의 단일 프로세스 실행.
+        화면 캡처 → 템플릿 매칭 → 클릭(또는 더블클릭) → 강조된 이미지 저장의 단일 프로세스 실행.
 
         Args:
             template_path (str): 매칭할 템플릿 이미지의 경로.
+            double_click (bool): True일 경우 더블클릭 수행, 기본값은 False.
 
         Returns:
             bool: 성공(True) 또는 실패(False)
@@ -66,8 +67,13 @@ class ScreenHandler:
 
             log_manager.logger.info(f"템플릿이 매칭된 좌표: {location}")
 
-            # 3. 클릭
-            self.action_handler.click(x=location[0], y=location[1])
+            # 3. 클릭 또는 더블클릭
+            if double_click:
+                self.action_handler.double_click(x=location[0], y=location[1])
+                log_manager.logger.info("더블클릭 수행 완료")
+            else:
+                self.action_handler.click(x=location[0], y=location[1])
+                log_manager.logger.info("단일 클릭 수행 완료")
 
             # 4. 강조된 스크린샷 저장
             highlighted_path = click_and_save_with_highlight(location)
@@ -78,6 +84,7 @@ class ScreenHandler:
         except Exception as e:
             log_manager.logger.error(f"프로세스 중 오류 발생: {e}")
             return f"오류 발생: {e}"
+
 
 if __name__ == "__main__":
     # ScreenHandler 인스턴스 생성

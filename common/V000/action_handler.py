@@ -44,6 +44,18 @@ class ActionHandler:
         pyautogui.click(x=x, y=y, button=button)
         log_manager.logger.info(f"Clicked at ({x}, {y}) with button {button}")
 
+    def double_click(self, x, y, button="left"):
+        """
+        지정된 좌표를 더블클릭합니다.
+
+        Args:
+            x (int): 클릭할 X 좌표.
+            y (int): 클릭할 Y 좌표.
+            button (str): 클릭할 버튼 ("left", "right", "middle").
+        """
+        pyautogui.click(x=x, y=y, clicks=2, button=button, interval=0.1)
+        log_manager.logger.info(f"Double-clicked at ({x}, {y}) with button {button}")
+
     def move_to(self, x, y, duration=0.5):
         """
         지정된 좌표로 마우스를 이동합니다.

@@ -1,5 +1,6 @@
 import win32gui
 import win32con
+import win32api
 import os
 import sys
 
@@ -36,6 +37,21 @@ def resize_game_window(window_title, width, height, x=150, y=50):
     else:
         log_manager.logger.info(f"'{window_title}' 창을 찾을 수 없습니다.")
 
+def focus_game_window(window_title):
+    """
+    지정된 제목의 창에 포커스를 맞춥니다.
+    
+    :param window_title: 창의 제목
+    """
+    hwnd = win32gui.FindWindow(None, window_title)
+    if hwnd:
+        # 창을 화면 위로 가져오고 포커스 맞춤
+        win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # 창이 최소화되어 있다면 복원
+        win32gui.SetForegroundWindow(hwnd)  # 포커스를 맞춤
+        log_manager.logger.info(f"'{window_title}' 창에 포커스를 맞췄습니다.")
+    else:
+        log_manager.logger.info(f"'{window_title}' 창을 찾을 수 없습니다.")
+
 def list_windows():
     def callback(hwnd, extra):
         title = win32gui.GetWindowText(hwnd)
@@ -46,6 +62,8 @@ def list_windows():
 
 # 예제 실행
 if __name__ == "__main__":
-    # list_windows()
+    list_windows()
     game_title = "NIKKE"  # 게임 창의 제목을 정확히 입력
     resize_game_window(game_title, 2200, 1300)  # 원하는 크기와 위치 설정
+    # test_title = '로그인 - Google 계정 - Chrome'
+    # focus_game_window(test_title)  # 원하는 크기와 위치 설정
