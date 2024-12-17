@@ -1,9 +1,8 @@
 import os
 import sys
-from datetime import datetime
 
 # 프로젝트 루트 경로 추가
-current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+current_file = os.path.abspath(__file__)
 project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
 sys.path.append(project_root)
 
@@ -13,7 +12,6 @@ path_manager = PathManager()
 sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("logs"))
 sys.path.append(path_manager.get_path("common"))
-
 
 try:
     # 필요한 모듈 임포트
@@ -28,11 +26,21 @@ class ScreenHandler:
     """
     화면 캡처, 템플릿 매칭, 클릭 및 클릭 후 강조된 이미지 저장을 관리하는 클래스.
     """
+    _instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
+            cls._instance = super(ScreenHandler, cls).__new__(cls)
+        return cls._instance
+
     def __init__(self):
-        # 템플릿 매칭 및 액션 핸들러 초기화
-        self.matcher = TemplateMatcher()
-        self.matcher.set_strategy(ExactMatchStrategy())
-        self.action_handler = ActionHandler()
+        if not hasattr(self, 'initialized'):  # 인스턴스 중복 초기화 방지
+            # 템플릿 매칭 및 액션 핸들러 초기화
+            self.matcher = TemplateMatcher()
+            self.matcher.set_strategy(ExactMatchStrategy())
+            self.action_handler = ActionHandler()
+            self.initialized = True  # 초기화 완료 상태
+            log_manager.logger.info("ScreenHandler initialized")
 
     def process(self, template_path):
         """
@@ -42,7 +50,7 @@ class ScreenHandler:
             template_path (str): 매칭할 템플릿 이미지의 경로.
 
         Returns:
-            str: 강조된 이미지 파일 경로 또는 에러 메시지.
+            bool: 성공(True) 또는 실패(False)
         """
         try:
             # 1. 화면 캡처
@@ -54,7 +62,7 @@ class ScreenHandler:
 
             if not is_match:
                 log_manager.logger.info("템플릿이 화면에서 발견되지 않았습니다.")
-                return "템플릿 매칭 실패"
+                return False
 
             log_manager.logger.info(f"템플릿이 매칭된 좌표: {location}")
 
@@ -63,31 +71,31 @@ class ScreenHandler:
 
             # 4. 강조된 스크린샷 저장
             highlighted_path = click_and_save_with_highlight(location)
-            log_manager.logger.info(f"강조된 스크린샷 저장 완료: {highlighted_path}")
+            log_manager.logger.info(f"클릭 스크린샷 저장 완료: {highlighted_path}")
 
-            return highlighted_path
+            return True
 
         except Exception as e:
             log_manager.logger.error(f"프로세스 중 오류 발생: {e}")
             return f"오류 발생: {e}"
 
 if __name__ == "__main__":
-    import os
-
     # ScreenHandler 인스턴스 생성
     screen_handler = ScreenHandler()
 
     # 루트 디렉토리 설정 (NikkePCAuto)
     current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
     project_root = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
+    template_base_path = os.path.join(project_root, "assets", "login")
 
     # 템플릿 이미지 경로 설정
-    template_path = os.path.join(project_root, "assets", "test", "test.png")
+    template_path = os.path.join(template_base_path, "a_icon.png")
 
     # 프로세스 실행
-    result = screen_handler.process(template_path)
+    success = screen_handler.process(template_path)
 
-    if "오류 발생" not in result:
-        print(f"프로세스 완료! 강조된 이미지 저장 경로: {result}")
+    if success:
+        print("프로세스 완료! 템플릿 매칭 및 클릭이 성공적으로 수행되었습니다.")
     else:
-        print(result)
+        print("프로세스 실패! 템플릿을 찾을 수 없거나 오류가 발생했습니다.")
+

@@ -9,39 +9,32 @@ sys.path.append(project_root)
 from manage import PathManager 
 
 path_manager = PathManager()
-sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("logs"))
-sys.path.append(path_manager.get_path("common"))
+sys.path.append(path_manager.get_path("assets_login"))
 sys.path.append(path_manager.get_path("module"))
 
 try:
-    from common.V000 import matcher 
-    from utils import capture_screen
     from logs import log_manager
-    from click_image import ScreenHandler
+    from module import screenhandler
 except Exception as e:
     log_manager.logger.info(f"임포트 실패: {e}")
 
 def main():
-    # 현재 화면 캡처
-    captured_screen_path = capture_screen()
+    """
+    로그인 동작
+    """
+    log_manager.logger.info("로그인 자동화 프로세스를 시작합니다.")
 
-    # 루트 디렉토리 설정 (NikkePCAuto)
-    current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
-    base_dir = os.path.abspath(os.path.join(current_file, "..", "..", ".."))  # 루트 디렉토리 경로
-    # 템플릿 이미지 경로 설정
-    template_path = os.path.join(base_dir, "assets", "test", "test.png")
+    # 'login' 폴더의 템플릿 이미지 경로
+    login_template_path = os.path.join(path_manager.get_path("assets_login"), "a_icon.png")
+    # log_manager.logger.debug(f"템플릿 경로: {login_template_path}")
 
-    try:
-        # 템플릿 매칭 수행
-        is_match, location = matcher.match_template(captured_screen_path, template_path)
-
-        if is_match:
-            log_manager.logger.info(f"Template matched at location: {location}")
-        else:
-            log_manager.logger.info("Template did not match.")
-    except ValueError as e:
-        log_manager.logger.info(f"Error during matching: {e}")
+    # 1단계: 로그인 아이콘 클릭
+    log_manager.logger.info("1단계: 로그인 아이콘 클릭 시작")
+    if not screenhandler.process(login_template_path):
+        log_manager.logger.error("1단계 실패: 로그인 아이콘을 찾을 수 없습니다.")
+        return
+    log_manager.logger.info("1단계 완료: 로그인 아이콘 클릭 성공")
 
 
 
