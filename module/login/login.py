@@ -17,7 +17,7 @@ try:
     from logs import log_manager
     from module import screenhandler
 except Exception as e:
-    log_manager.logger.info(f"임포트 실패: {e}")
+    print(f"임포트 실패: {e}")
 
 def run():
     """
@@ -35,8 +35,6 @@ def run():
         log_manager.logger.error("1단계 실패: 로그인 아이콘을 찾을 수 없습니다.")
         return
     log_manager.logger.info("1단계 완료: 로그인 아이콘 클릭 성공")
-
-
 
 if __name__ == "__main__":
     run()

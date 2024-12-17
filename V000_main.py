@@ -3,7 +3,7 @@ from utils import capture_screen
 from logs import log_manager
 
 def main():
-    
+    pass
 
 
 

@@ -1,0 +1,1 @@
+from .win32 import resize_game_window

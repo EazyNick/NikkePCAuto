@@ -40,7 +40,7 @@ class ScreenHandler:
             self.matcher = matcher
             self.action_handler = ActionHandler()
             self.initialized = True  # 초기화 완료 상태
-            log_manager.logger.info("ScreenHandler initialized")
+            log_manager.logger.debug("ScreenHandler initialized")
 
     def process(self, template_path):
         """

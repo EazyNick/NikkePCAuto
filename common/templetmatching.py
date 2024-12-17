@@ -18,7 +18,7 @@ try:
     from utils import capture_screen
     from logs import log_manager
 except Exception as e:
-    log_manager.logger.info(f"임포트 실패: {e}")
+    print(f"임포트 실패: {e}")
 
 class TemplateMatcher:
     """

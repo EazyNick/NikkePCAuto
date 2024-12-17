@@ -16,7 +16,7 @@ sys.path.append(path_manager.get_path("logs"))
 try:
     from logs import log_manager
 except Exception as e:
-    log_manager.logger.info(f"임포트 실패: {e}")
+    print(f"임포트 실패: {e}")
 
 def resize_game_window(window_title, width, height, x=150, y=50):
     """

@@ -137,7 +137,7 @@ class LogManager:
         # 파일을 생성 시간에 따라 정렬합니다.
         files.sort(key=os.path.getmtime)
 
-        self.logger.debug('clean_up_logs')
+        self.logger.info('clean_up_logs')
 
         # 지정된 개수를 초과하는 파일이 있다면, 가장 오래된 파일부터 삭제합니다.
         while len(files) > self.max_files:
