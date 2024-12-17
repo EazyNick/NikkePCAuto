@@ -16,7 +16,8 @@ sys.path.append(path_manager.get_path("common"))
 try:
     # 필요한 모듈 임포트
     from utils import capture_screen, click_and_save_with_highlight
-    from common.V000 import TemplateMatcher, ExactMatchStrategy, ActionHandler
+    # from common.V000 import TemplateMatcher, ExactMatchStrategy, ActionHandler
+    from common.V000 import matcher, ActionHandler
     from logs import log_manager
 except Exception as e:
     print(f"임포트 실패: {e}")
@@ -36,8 +37,7 @@ class ScreenHandler:
     def __init__(self):
         if not hasattr(self, 'initialized'):  # 인스턴스 중복 초기화 방지
             # 템플릿 매칭 및 액션 핸들러 초기화
-            self.matcher = TemplateMatcher()
-            self.matcher.set_strategy(ExactMatchStrategy())
+            self.matcher = matcher
             self.action_handler = ActionHandler()
             self.initialized = True  # 초기화 완료 상태
             log_manager.logger.info("ScreenHandler initialized")

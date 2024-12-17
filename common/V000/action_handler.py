@@ -16,7 +16,7 @@ sys.path.append(path_manager.get_path("common"))
 
 try:
     from utils import capture_screen
-    from common.V000 import TemplateMatcher, ExactMatchStrategy
+    from common.V000 import matcher
     from logs import log_manager
 except Exception as e:
     log_manager.logger.info(f"임포트 실패: {e}")
@@ -71,9 +71,6 @@ class ActionHandler:
 
 if __name__ == "__main__":
     # TemplateMatcher 인스턴스 생성
-    matcher = TemplateMatcher()
-    matcher.set_strategy(ExactMatchStrategy())
-
     # 현재 화면 캡처 및 템플릿 경로 설정
     captured_screen_path = capture_screen()
     # 루트 디렉토리 설정 (NikkePCAuto)

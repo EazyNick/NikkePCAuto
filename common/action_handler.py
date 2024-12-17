@@ -12,11 +12,10 @@ from manage import PathManager
 path_manager = PathManager()
 sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("logs"))
-sys.path.append(path_manager.get_path("common"))
 
 try:
     from utils import capture_screen
-    from common.V000 import TemplateMatcher, ExactMatchStrategy
+    from common import matcher
     from logs import log_manager
 except Exception as e:
     log_manager.logger.info(f"임포트 실패: {e}")
@@ -70,10 +69,6 @@ class ActionHandler:
         log_manager.logger.info(f"Dragged to ({x}, {y}) in {duration} seconds with button {button}")
 
 if __name__ == "__main__":
-    # TemplateMatcher 인스턴스 생성
-    matcher = TemplateMatcher()
-    matcher.set_strategy(ExactMatchStrategy())
-
     # 현재 화면 캡처 및 템플릿 경로 설정
     captured_screen_path = capture_screen()
     

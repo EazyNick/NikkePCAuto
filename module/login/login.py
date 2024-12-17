@@ -19,7 +19,7 @@ try:
 except Exception as e:
     log_manager.logger.info(f"임포트 실패: {e}")
 
-def main():
+def run():
     """
     로그인 동작
     """
@@ -39,4 +39,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    run()
