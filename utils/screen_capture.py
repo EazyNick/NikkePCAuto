@@ -30,7 +30,9 @@ def capture_screen():
     screenshot = pyautogui.screenshot()
 
     # 저장할 디렉토리 경로 설정
-    base_dir = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto"
+    # 루트 디렉토리 설정 (NikkePCAuto)
+    current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
+    base_dir = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
     temp_dir = os.path.join(base_dir, "assets", "temp")
     os.makedirs(temp_dir, exist_ok=True)  # 디렉토리가 없으면 생성
 
@@ -58,7 +60,9 @@ def click_and_save_with_highlight(coords):
         str: 강조 표시된 새 스크린샷의 파일 경로.
     """
     # 현재 화면 캡처
-    base_dir = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto"
+    # 루트 디렉토리 설정 (NikkePCAuto)
+    current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
+    base_dir = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
     temp_dir = os.path.join(base_dir, "assets", "temp")
     os.makedirs(temp_dir, exist_ok=True)  # 디렉토리가 없으면 생성
 

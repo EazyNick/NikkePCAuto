@@ -72,11 +72,17 @@ class ScreenHandler:
             return f"오류 발생: {e}"
 
 if __name__ == "__main__":
+    import os
+
     # ScreenHandler 인스턴스 생성
     screen_handler = ScreenHandler()
 
+    # 루트 디렉토리 설정 (NikkePCAuto)
+    current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
+    project_root = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
+
     # 템플릿 이미지 경로 설정
-    template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png"
+    template_path = os.path.join(project_root, "assets", "test", "test.png")
 
     # 프로세스 실행
     result = screen_handler.process(template_path)

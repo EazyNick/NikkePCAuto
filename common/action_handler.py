@@ -76,7 +76,13 @@ if __name__ == "__main__":
 
     # 현재 화면 캡처 및 템플릿 경로 설정
     captured_screen_path = capture_screen()
-    template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png"
+    
+    # 루트 디렉토리 설정 (NikkePCAuto)
+    current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
+    project_root = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
+
+    # 템플릿 이미지 경로 설정
+    template_path = os.path.join(project_root, "assets", "test", "test.png")
 
     # 템플릿 매칭 수행
     is_match, location = matcher.match_template(captured_screen_path, template_path)

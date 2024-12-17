@@ -12,6 +12,7 @@ def main():
 
 if __name__ == "__main__":
     import cv2
+    import os
     # TemplateMatcher 인스턴스 생성
     matcher = TemplateMatcher()
 
@@ -22,7 +23,10 @@ if __name__ == "__main__":
     captured_screen_path = capture_screen()
 
     # 템플릿 매칭 수행 (정확한 경로 사용)
-    template_path = r"C:\Users\User\Desktop\python\auto\python\NikkePCAuto\assets\test\test.png" # 절대 경로 생성
+    # 루트 디렉토리 설정 (NikkePCAuto)
+    base_dir = os.path.abspath(__file__)  # 현재 파일 절대 경로
+    # 템플릿 이미지 경로 설정
+    template_path = os.path.join(base_dir, "assets", "test", "test.png")
 
     img = cv2.imread(captured_screen_path)
 
