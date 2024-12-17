@@ -1,24 +1,13 @@
-from common.V000 import TemplateMatcher, ExactMatchStrategy
+from common.V000 import matcher
 from utils import capture_screen
 from logs import log_manager
 
 def main():
     pass
 
-
-
-
-
-
 if __name__ == "__main__":
     import cv2
     import os
-    # TemplateMatcher 인스턴스 생성
-    matcher = TemplateMatcher()
-
-    # 매칭 전략 설정
-    matcher.set_strategy(ExactMatchStrategy())
-
     # 현재 화면 캡처
     captured_screen_path = capture_screen()
 
@@ -26,7 +15,8 @@ if __name__ == "__main__":
     # 루트 디렉토리 설정 (NikkePCAuto)
     base_dir = os.path.abspath(__file__)  # 현재 파일 절대 경로
     # 템플릿 이미지 경로 설정
-    template_path = os.path.join(base_dir, "assets", "test", "test.png")
+    project_root = os.path.abspath(os.path.join(base_dir, ".."))
+    template_path = os.path.join(project_root, "assets", "test", "test.png")
 
     img = cv2.imread(captured_screen_path)
 
@@ -41,3 +31,4 @@ if __name__ == "__main__":
         log_manager.logger.info(f"Template matched at location: {location}")
     else:
         log_manager.logger.info("Template did not match.")
+        

@@ -20,7 +20,6 @@ try:
 except Exception as e:
     print(f"임포트 실패: {e}")
 
-
 class TemplateMatcher:
     """
     Singleton
@@ -28,8 +27,7 @@ class TemplateMatcher:
     TemplateMatcher Singleton Class: Matches a template image against the current screen.
     """
     _instance = None
-
-    #
+    
     def __new__(cls, *args, **kwargs):
         """
         __new__는 클래스 인스턴스가 생성될 때 호출되는 메서드
