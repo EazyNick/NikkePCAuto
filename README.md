@@ -75,7 +75,7 @@ python module/click_image.py
 - 로그 파일을 통해 실행 상태와 결과를 검토할 수 있습니다.
 
 ## **문의 및 피드백** 💬  
-프로그램에 대한 질문이나 개선 사항은 [GitHub Issues](https://github.com/your-username/NikkePCAuto/issues)에 남겨주세요.
+프로그램에 대한 질문이나 개선 사항은 [GitHub Issues](https://github.com/EazyNick/NikkePCAuto/issues)에 남겨주세요.
 
 **승리의 여신: 니케 자동화 프로그램**은 QA 테스트의 반복 작업을 효율화하고, 정확도를 높이기 위해 설계되었습니다.  
 프로그램 사용을 통해 테스트 프로세스를 더욱 **자동화**하고 **최적화**할 수 있습니다! 😊
