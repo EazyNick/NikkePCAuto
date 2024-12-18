@@ -17,7 +17,7 @@ sys.path.append(path_manager.get_path("display"))
 
 try:
     from logs import log_manager
-    from module import screenhandler, ProcessStep
+    from module import ProcessStep
     from display import resize_game_window, focus_game_window
 except Exception as e:
     print(f"임포트 실패: {e}")

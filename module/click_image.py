@@ -23,7 +23,7 @@ except Exception as e:
     print(f"임포트 실패: {e}")
     sys.exit(1)
 
-class ScreenHandler:
+class TemplateProcessor:
     """
     화면 캡처, 템플릿 매칭, 클릭 및 클릭 후 강조된 이미지 저장을 관리하는 클래스.
     """
@@ -31,7 +31,7 @@ class ScreenHandler:
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            cls._instance = super(ScreenHandler, cls).__new__(cls)
+            cls._instance = super(TemplateProcessor, cls).__new__(cls)
         return cls._instance
 
     def __init__(self):
@@ -40,7 +40,7 @@ class ScreenHandler:
             self.matcher = matcher
             self.action_handler = ActionHandler()
             self.initialized = True  # 초기화 완료 상태
-            log_manager.logger.debug("ScreenHandler initialized")
+            log_manager.logger.debug("TemplateProcessor initialized")
 
     def process(self, template_path, double_click=False):
         """
@@ -87,8 +87,8 @@ class ScreenHandler:
 
 
 if __name__ == "__main__":
-    # ScreenHandler 인스턴스 생성
-    screen_handler = ScreenHandler()
+    # TemplateProcessor 인스턴스 생성
+    screen_handler = TemplateProcessor()
 
     # 루트 디렉토리 설정 (NikkePCAuto)
     current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로

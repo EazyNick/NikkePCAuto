@@ -18,7 +18,7 @@ sys.path.append(path_manager.get_path("common"))
 
 try:
     from logs import log_manager
-    from module import screenhandler
+    from module import templateprocessor
     from common.V000 import ActionHandler
     from display import resize_game_window, focus_game_window
 except Exception as e:
@@ -66,7 +66,7 @@ class ProcessStep:
         elif drag is not None:  # drag가 dict가 아닌 다른 값일 경우 경고
             log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정 무시됨: {drag}")
 
-        if not screenhandler.process(template_path, double_click):
+        if not templateprocessor.process(template_path, double_click):
             log_manager.logger.error(f"{step_name} 실패: '{image_name}' 아이콘을 찾을 수 없습니다.")
             return False
 
@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
         # 각 단계 실행
         for step in steps:
-            if not process_step(step["step"], step["image"], step.get("double_click", False), step["wait"]):
+            if not ProcessStep.execute(step["step"], step["image"], step.get("double_click", False), step["wait"]):
                 return  # 단계 실패 시 종료
 
         # 추가 동작: 게임 창 포커스 및 크기 조정
