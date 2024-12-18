@@ -16,18 +16,18 @@ sys.path.append(path_manager.get_path("commands"))
 try:
     from logs import log_manager
     from commands import Command
-    from module import freind_run
+    from module import outpost_run
 except Exception as e:
     print(f"임포트 실패: {e}")
 
-class FreindCommand(Command):
+class OutpostCommand(Command):
     """
     로그인 실행 커맨드
     """
     def execute(self):
         log_manager.logger.info("로그인 실행 시작")
         try:
-            freind_run()
+            outpost_run()
             log_manager.logger.info("로그인 실행 완료")
         except Exception as e:
             log_manager.logger.error(f"로그인 실행 중 오류 발생: {e}")
@@ -36,7 +36,7 @@ if __name__ == "__main__":
     log_manager.logger.info("LoginCommand 테스트 시작")
 
     # LoginCommand 인스턴스 생성
-    command = FreindCommand()
+    command = OutpostCommand()
 
     # 성공 테스트
     try:
