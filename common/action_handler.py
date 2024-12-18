@@ -4,7 +4,7 @@ import sys
 
 # 프로젝트 루트 경로 추가
 current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
-project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
+project_root = os.path.abspath(os.path.join(current_file, "..", "..", ".."))
 sys.path.append(project_root)
 
 from manage import PathManager
@@ -12,10 +12,11 @@ from manage import PathManager
 path_manager = PathManager()
 sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("logs"))
+sys.path.append(path_manager.get_path("common"))
 
 try:
     from utils import capture_screen
-    from common import matcher
+    from common.V000 import matcher
     from logs import log_manager
 except Exception as e:
     print(f"임포트 실패: {e}")
@@ -43,6 +44,18 @@ class ActionHandler:
         pyautogui.click(x=x, y=y, button=button)
         log_manager.logger.info(f"Clicked at ({x}, {y}) with button {button}")
 
+    def double_click(self, x, y, button="left"):
+        """
+        지정된 좌표를 더블클릭합니다.
+
+        Args:
+            x (int): 클릭할 X 좌표.
+            y (int): 클릭할 Y 좌표.
+            button (str): 클릭할 버튼 ("left", "right", "middle").
+        """
+        pyautogui.click(x=x, y=y, clicks=2, button=button, interval=0.1)
+        log_manager.logger.info(f"Double-clicked at ({x}, {y}) with button {button}")
+
     def move_to(self, x, y, duration=0.5):
         """
         지정된 좌표로 마우스를 이동합니다.
@@ -55,26 +68,28 @@ class ActionHandler:
         pyautogui.moveTo(x, y, duration=duration)
         log_manager.logger.info(f"Moved to ({x}, {y}) in {duration} seconds")
 
-    def drag_to(self, x, y, duration=0.5, button="left"):
+    def drag(self, start_x, start_y, end_x, end_y, duration=0.5):
         """
-        마우스를 드래그합니다.
+        지정된 시작 좌표에서 끝 좌표로 마우스를 드래그합니다.
 
         Args:
-            x (int): 드래그 종료 X 좌표.
-            y (int): 드래그 종료 Y 좌표.
+            start_x (int): 드래그 시작 X 좌표.
+            start_y (int): 드래그 시작 Y 좌표.
+            end_x (int): 드래그 종료 X 좌표.
+            end_y (int): 드래그 종료 Y 좌표.
             duration (float): 드래그 시간 (초 단위).
-            button (str): 드래그할 버튼 ("left", "right", "middle").
         """
-        pyautogui.dragTo(x, y, duration=duration, button=button)
-        log_manager.logger.info(f"Dragged to ({x}, {y}) in {duration} seconds with button {button}")
+        pyautogui.moveTo(start_x, start_y)
+        pyautogui.dragTo(end_x, end_y, duration=duration)
+        log_manager.logger.info(f"Dragged from ({start_x}, {start_y}) to ({end_x}, {end_y}) in {duration} seconds")
 
 if __name__ == "__main__":
+    # TemplateMatcher 인스턴스 생성
     # 현재 화면 캡처 및 템플릿 경로 설정
     captured_screen_path = capture_screen()
-    
     # 루트 디렉토리 설정 (NikkePCAuto)
     current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
-    project_root = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
+    project_root = os.path.abspath(os.path.join(current_file, "..", "..", ".."))  # 루트 디렉토리 경로
 
     # 템플릿 이미지 경로 설정
     template_path = os.path.join(project_root, "assets", "test", "test.png")

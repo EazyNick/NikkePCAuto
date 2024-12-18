@@ -68,18 +68,20 @@ class ActionHandler:
         pyautogui.moveTo(x, y, duration=duration)
         log_manager.logger.info(f"Moved to ({x}, {y}) in {duration} seconds")
 
-    def drag_to(self, x, y, duration=0.5, button="left"):
+    def drag(self, start_x, start_y, end_x, end_y, duration=0.5):
         """
-        마우스를 드래그합니다.
+        지정된 시작 좌표에서 끝 좌표로 마우스를 드래그합니다.
 
         Args:
-            x (int): 드래그 종료 X 좌표.
-            y (int): 드래그 종료 Y 좌표.
+            start_x (int): 드래그 시작 X 좌표.
+            start_y (int): 드래그 시작 Y 좌표.
+            end_x (int): 드래그 종료 X 좌표.
+            end_y (int): 드래그 종료 Y 좌표.
             duration (float): 드래그 시간 (초 단위).
-            button (str): 드래그할 버튼 ("left", "right", "middle").
         """
-        pyautogui.dragTo(x, y, duration=duration, button=button)
-        log_manager.logger.info(f"Dragged to ({x}, {y}) in {duration} seconds with button {button}")
+        pyautogui.moveTo(start_x, start_y)
+        pyautogui.dragTo(end_x, end_y, duration=duration)
+        log_manager.logger.info(f"Dragged from ({start_x}, {start_y}) to ({end_x}, {end_y}) in {duration} seconds")
 
 if __name__ == "__main__":
     # TemplateMatcher 인스턴스 생성

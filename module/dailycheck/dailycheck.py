@@ -23,19 +23,23 @@ except Exception as e:
 
 def run():
     """
-    친구 하트 주고받기
+    일일 출석체크
     """
 
-    assets_login_path = path_manager.get_path("assets_freind")
+    assets_login_path = path_manager.get_path("assets_dailycheck")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("친구 자동화 프로세스를 시작합니다.")
+    log_manager.logger.info("일일 출석체크 프로세스를 시작합니다.")
 
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
-        {"step": "1단계: 친구 목록 클릭", "image": "a_freiend.png", "wait": 8},
-        {"step": "2단계: 하트 보내기", "image": "b_sendhart.png", "wait": 3},
-        {"step": "3단계: 확인", "image": "c_ok.png", "wait": 3},
-        {"step": "4단계: 나가기", "image": "d_exit.png", "wait": 5},
+        {"step": "1단계: 알람 아이콘 클릭", "image": "a_alert.png", "wait": 3},
+        {"step": "2단계: 이벤트 이동", "image": "b_move.png", "drag": {"start": (1250, 910), "end": (1250, 465), "duration": 1.0}, "wait": 3},
+        {"step": "3단계: 이벤트 이동2", "image": "c_move2.png", "wait": 6},
+        {"step": "4단계: 확인", "image": "d_ok.png", "wait": 2},
+        {"step": "1단계: 출석체크", "image": "e_dailycheckgo.png", "wait": 5},
+        {"step": "2단계: 확인", "image": "f_ok.png", "wait": 3},
+        {"step": "3단계: 나가기1", "image": "g_exit.png", "wait": 3},
+        {"step": "4단계: 나가기2", "image": "h_exit.png", "wait": 3},
     ]
 
     # 각 단계 실행
