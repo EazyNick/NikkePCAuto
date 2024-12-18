@@ -13,6 +13,7 @@ class PathManager:
             "assets_login": os.path.join(self.project_root, "assets", "login"),
             "assets_temp": os.path.join(self.project_root, "assets", "temp"),
             "assets_test": os.path.join(self.project_root, "assets", "test"),
+            "commands": os.path.join(self.project_root, "commands"),
             "common": os.path.join(self.project_root, "common"),
             "common_V000": os.path.join(self.project_root, "common", "V000"),
             "display": os.path.join(self.project_root, "display"),  
