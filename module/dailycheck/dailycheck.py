@@ -55,11 +55,5 @@ def run():
             log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
             return  # 단계 실패 시 함수 종료
 
-    # # 추가 동작: 게임 창 포커스 및 크기 조정
-    # resize_game_window('NIKKE', 2200, 1300)
-    # time.sleep(0.1)
-    # focus_game_window('NIKKE')
-    # time.sleep(1)
-
 if __name__ == "__main__":
     run()

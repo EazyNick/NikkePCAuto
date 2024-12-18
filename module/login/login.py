@@ -18,7 +18,7 @@ sys.path.append(path_manager.get_path("display"))
 try:
     from logs import log_manager
     from module import ProcessStep
-    from display import resize_game_window, focus_game_window
+    from display import screenhandler
 except Exception as e:
     print(f"임포트 실패: {e}")
 
@@ -58,10 +58,15 @@ def run():
             return  # 단계 실패 시 함수 종료
 
     # 추가 동작: 게임 창 포커스 및 크기 조정
-    resize_game_window('NIKKE', 2200, 1300)
+    screenhandler.resize_game_window('NIKKE', 2200, 1300)
     time.sleep(0.1)
-    focus_game_window('NIKKE')
+    screenhandler.focus_game_window('NIKKE')
     time.sleep(1)
 
 if __name__ == "__main__":
+    # 추가 동작: 게임 창 포커스 및 크기 조정
+    screenhandler.resize_game_window('NIKKE', 2200, 1300)
+    time.sleep(0.1)
+    screenhandler.focus_game_window('NIKKE')
+    time.sleep(1)
     run()

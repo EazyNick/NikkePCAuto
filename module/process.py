@@ -20,7 +20,7 @@ try:
     from logs import log_manager
     from module import templateprocessor
     from common.V000 import ActionHandler
-    from display import resize_game_window, focus_game_window
+    from display import screenhandler
 except Exception as e:
     print(f"임포트 실패: {e}")
 
@@ -74,7 +74,7 @@ class ProcessStep:
 
         # 창 포커스
         if window_name:
-            focus_game_window(window_name)
+            screenhandler.focus_game_window(window_name)
             log_manager.logger.info(f"창 포커스: {window_name}")
             time.sleep(1)
 
@@ -106,11 +106,11 @@ if __name__ == "__main__":
                 return  # 단계 실패 시 종료
 
         # 추가 동작: 게임 창 포커스 및 크기 조정
-        focus_game_window('NIKKE')
+        screenhandler.focus_game_window('NIKKE')
         time.sleep(1)
-        resize_game_window('NIKKE', 2200, 1300)
+        screenhandler.resize_game_window('NIKKE', 2200, 1300)
         time.sleep(0.1)
-        focus_game_window('NIKKE')
+        screenhandler.focus_game_window('NIKKE')
         time.sleep(1)
 
     run()

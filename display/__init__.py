@@ -1,1 +1,3 @@
-from .win32 import resize_game_window, focus_game_window
+from .win32 import ScreenHandler
+
+screenhandler = ScreenHandler()
