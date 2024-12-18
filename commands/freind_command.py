@@ -16,7 +16,7 @@ sys.path.append(path_manager.get_path("commands"))
 try:
     from logs import log_manager
     from commands import Command
-    from module import login_run
+    from module import freind_run
 except Exception as e:
     print(f"임포트 실패: {e}")
 
@@ -27,7 +27,7 @@ class LoginCommand(Command):
     def execute(self):
         log_manager.logger.info("로그인 실행 시작")
         try:
-            login_run()  # 로그인 동작 실행
+            freind_run()
             log_manager.logger.info("로그인 실행 완료")
         except Exception as e:
             log_manager.logger.error(f"로그인 실행 중 오류 발생: {e}")
@@ -50,9 +50,9 @@ if __name__ == "__main__":
     try:
         log_manager.logger.info("실패 테스트 실행")
 
-        # login_run.run 함수에 강제로 예외 발생
-        from module import login_run
-        login_run.run = lambda: (_ for _ in ()).throw(Exception("로그인 오류"))
+        # freind_run.run 함수에 강제로 예외 발생
+        from module import freind_run
+        freind_run.run = lambda: (_ for _ in ()).throw(Exception("로그인 오류"))
 
         command.execute()
     except Exception as e:

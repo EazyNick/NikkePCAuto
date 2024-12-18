@@ -22,34 +22,49 @@ try:
 except Exception as e:
     print(f"임포트 실패: {e}")
 
-def process_step(step_name, image_name, double_click=False, wait_time=3, window_name=None):
+class ProcessStep:
     """
-    각 단계를 수행하는 공통 함수
-
-    Args:
-        step_name (str): 단계 이름 (로그 출력용)
-        image_name (str): 템플릿 이미지 파일명
-        double_click (bool): 더블 클릭 여부
-        wait_time (int): 다음 단계로 넘어가기 전 대기 시간 (초)
-        window_name (str): 포커스할 창 이름 (기본값: None)
+    각 단계를 수행하는 클래스
     """
-    login_template_path = os.path.join(path_manager.get_path("assets_login"), image_name)
-    log_manager.logger.info(f"{step_name} 시작")
+    def __init__(self, base_path):
+        """
+        Args:
+            base_path (str): 템플릿 이미지의 기본 경로
+        """
+        self.base_path = base_path
 
-    if not screenhandler.process(login_template_path, double_click):
-        log_manager.logger.error(f"{step_name} 실패: '{image_name}' 아이콘을 찾을 수 없습니다.")
-        return False
+    def execute(self, step_name, image_name, double_click=False, wait_time=3, window_name=None):
+        """
+        단계를 수행하는 메서드
 
-    log_manager.logger.info(f"{step_name} 완료: '{image_name}' 아이콘 클릭 성공")
-    
-    # 창 포커스
-    if window_name:
-        focus_game_window(window_name)
-        log_manager.logger.info(f"창 포커스: {window_name}")
-        time.sleep(1)
-    time.sleep(wait_time)
-    
-    return True
+        Args:
+            step_name (str): 단계 이름 (로그 출력용)
+            image_name (str): 템플릿 이미지 파일명
+            double_click (bool): 더블 클릭 여부
+            wait_time (int): 다음 단계로 넘어가기 전 대기 시간 (초)
+            window_name (str): 포커스할 창 이름 (기본값: None)
+
+        Returns:
+            bool: 단계 수행 성공 여부
+        """
+        template_path = os.path.join(self.base_path, image_name)
+        log_manager.logger.info(f"{step_name} 시작")
+
+        if not screenhandler.process(template_path, double_click):
+            log_manager.logger.error(f"{step_name} 실패: '{image_name}' 아이콘을 찾을 수 없습니다.")
+            return False
+
+        log_manager.logger.info(f"{step_name} 완료: '{image_name}' 아이콘 클릭 성공")
+        time.sleep(3)
+
+        # 창 포커스
+        if window_name:
+            focus_game_window(window_name)
+            log_manager.logger.info(f"창 포커스: {window_name}")
+            time.sleep(1)
+
+        time.sleep(wait_time)
+        return True
 
 if __name__ == "__main__":
 
