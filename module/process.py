@@ -36,13 +36,13 @@ class ProcessStep:
         self.base_path = base_path
         self.action_handler = ActionHandler()
 
-    def execute(self, step_name, image_name, double_click=False, drag=None, window_name=None, wait_time=3):
+    def execute(self, step_name, image_name_or_coords, double_click=False, drag=None, window_name=None, wait_time=3):
         """
         단계를 수행하는 메서드
 
         Args:
             step_name (str): 단계 이름 (로그 출력용)
-            image_name (str): 템플릿 이미지 파일명
+            image_name_or_coords (str | tuple): 템플릿 이미지 파일명 또는 클릭할 좌표 (x, y)
             double_click (bool): 더블 클릭 여부 (기본값: False)
             drag (dict): 드래그 동작 설정 {"start": (x1, y1), "end": (x2, y2), "duration": float}
             window_name (str): 포커스할 창 이름 (기본값: None)
@@ -51,7 +51,6 @@ class ProcessStep:
         Returns:
             bool: 단계 수행 성공 여부
         """
-        template_path = os.path.join(self.base_path, image_name)
         log_manager.logger.info(f"{step_name} 시작")
 
         # 드래그 동작 수행
@@ -64,11 +63,23 @@ class ProcessStep:
                 self.action_handler.drag(start[0], start[1], end[0], end[1], duration)
                 time.sleep(1)
         elif drag is not None:  # drag가 dict가 아닌 다른 값일 경우 경고
-            log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정 무시됨: {drag}")
+            log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정으로, 무시됨: {drag}")
 
-        if not templateprocessor.process(template_path, double_click):
-            log_manager.logger.error(f"{step_name} 실패: '{image_name}' 아이콘을 찾을 수 없습니다.")
-            return False
+        if isinstance(image_name_or_coords, tuple):
+            # 좌표를 클릭하는 경우
+            x, y = image_name_or_coords
+            if double_click:
+                self.action_handler.double_click(x, y)
+                log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 더블 클릭 완료")
+            else:
+                self.action_handler.click(x, y)
+                log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 클릭 완료")
+        else:
+            # 템플릿 매칭을 사용하는 경우
+            template_path = os.path.join(self.base_path, image_name_or_coords)
+            if not templateprocessor.process(template_path, double_click):
+                log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다.")
+                return False
 
         log_manager.logger.info(f"{step_name} 완료: '{image_name}' 아이콘 클릭 성공")
 
