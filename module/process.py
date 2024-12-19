@@ -81,13 +81,13 @@ class ProcessStep:
                 log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다.")
                 return False
 
-        log_manager.logger.info(f"{step_name} 완료: '{image_name}' 아이콘 클릭 성공")
-
+        log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
+        
         # 창 포커스
         if window_name:
+            time.sleep(5)
             screenhandler.focus_game_window(window_name)
             log_manager.logger.info(f"창 포커스: {window_name}")
-            time.sleep(1)
 
         time.sleep(wait_time)
         return True
@@ -102,13 +102,13 @@ if __name__ == "__main__":
 
         # 단계별 설정 (단계 이름, 이미지 파일명 또는 좌표, 더블클릭 여부, 대기 시간, 드래그 설정)
         steps = [
-            {"step": "1단계: 로그인 아이콘 클릭", "image": "a_icon.png", "double_click": True, "wait": 8},
-            {"step": "2단계: 구글 로그인", "image": "b_google.png", "wait": 3},
-            {"step": "3단계: 아이디 클릭", "image": (500, 300), "wait": 3},
-            {"step": "4단계: 계속", "image": "d_keep_going.png", "wait": 5},
-            {"step": "5단계: 페이지 닫기", "image": "e_closepage.png", "wait": 3},
-            {"step": "6단계: 웹페이지 종료", "image": "f_exit.png", "wait": 10},
-            {"step": "7단계: 게임 시작", "image": "g_gamestart.png", "wait": 3}
+            # {"step": "1단계: 로그인 아이콘 클릭", "image": "a_icon.png", "double_click": True, "wait": 8},
+            # {"step": "2단계: 구글 로그인", "image": "b_google.png", "wait": 3},
+            {"step": "3단계: 아이디 클릭", "image_name_or_coords": (500, 300), "wait": 3},
+            # {"step": "4단계: 계속", "image": "d_keep_going.png", "wait": 5},
+            # {"step": "5단계: 페이지 닫기", "image": "e_closepage.png", "wait": 3},
+            # {"step": "6단계: 웹페이지 종료", "image": "f_exit.png", "wait": 10},
+            # {"step": "7단계: 게임 시작", "image": "g_gamestart.png", "wait": 3}
         ]
 
         process_step = ProcessStep(base_path=path_manager.get_path("assets_login"))
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         for step in steps:
             if not process_step.execute(
                 step["step"], 
-                step["image"], 
+                step["image_name_or_coords"], 
                 step.get("double_click", False), 
                 step.get("drag"),
                 step.get("window_name"),
@@ -125,12 +125,12 @@ if __name__ == "__main__":
             ):
                 return  # 단계 실패 시 종료
 
-        # 추가 동작: 게임 창 포커스 및 크기 조정
-        screenhandler.focus_game_window('NIKKE')
-        time.sleep(1)
-        screenhandler.resize_game_window('NIKKE', 2200, 1300)
-        time.sleep(0.1)
-        screenhandler.focus_game_window('NIKKE')
-        time.sleep(1)
+        # # 추가 동작: 게임 창 포커스 및 크기 조정
+        # screenhandler.focus_game_window('NIKKE')
+        # time.sleep(1)
+        # screenhandler.resize_game_window('NIKKE', 2200, 1300)
+        # time.sleep(0.1)
+        # screenhandler.focus_game_window('NIKKE')
+        # time.sleep(1)
 
     run()

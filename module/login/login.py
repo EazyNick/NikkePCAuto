@@ -33,22 +33,22 @@ def run():
 
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
-        {"step": "1단계: 로그인 아이콘 클릭", "image": "a_icon.png", "double_click": True, "wait": 8},
-        {"step": "2단계: 구글 로그인", "image": "b_google.png", "window_name": "로그인 - Google 계정 - Chrome", "wait": 3},
-        {"step": "3단계: 아이디 로그인", "image": "c_google_login.png", "wait": 3},
-        {"step": "4단계: 계속", "image": "d_keep_going.png", "wait": 5},
-        # {"step": "5단계: 페이지 닫기", "image": "e_closepage.png", "wait": 3},
-        {"step": "6단계: 웹페이지 종료", "window_name": "NIKKE", "image": "f_exit.png", "wait": 3},
-        {"step": "7단계: 게임 시작", "image": "g_gamestart.png", "wait": 120},
-        {"step": "8단계: 게임 접속", "image": "h_ingame.png", "wait": 20},
-        {"step": "9단계: 공지사항 닫기", "image": "i_btn_X.png", "wait": 20},
+        {"step": "1단계: 로그인 아이콘 클릭", "image_name_or_coords": "a_icon.png", "double_click": True, "wait": 5},
+        {"step": "2단계: 구글 로그인", "image_name_or_coords": "b_google.png", "window_name": "로그인 - Google 계정 - Chrome", "wait": 2},
+        {"step": "3단계: 아이디 로그인", "image_name_or_coords": "c_google_login.png", "wait": 2},
+        {"step": "4단계: 계속", "image_name_or_coords": "d_keep_going.png", "wait": 4},
+        # {"step": "5단계: 페이지 닫기", "image_name_or_coords": "e_closepage.png", "wait": 3},
+        {"step": "6단계: 웹페이지 종료", "window_name": "NIKKE", "image_name_or_coords": "f_exit.png", "wait": 1},
+        {"step": "7단계: 게임 시작", "image_name_or_coords": "g_gamestart.png", "window_name": "NIKKE", "wait": 120},
+        {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "wait": 20},
+        {"step": "9단계: 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "wait": 20},
     ]
 
     # 각 단계 실행
     for step in steps:
         if not process_step.execute(
             step["step"], 
-            step["image"], 
+            step["image_name_or_coords"], 
             step.get("double_click", False), 
             step.get("drag"),
             step.get("window_name"),
@@ -65,8 +65,8 @@ def run():
 
 if __name__ == "__main__":
     # 추가 동작: 게임 창 포커스 및 크기 조정
-    screenhandler.resize_game_window('NIKKE', 2200, 1300)
-    time.sleep(0.1)
-    screenhandler.focus_game_window('NIKKE')
-    time.sleep(1)
+    # screenhandler.resize_game_window('NIKKE', 2200, 1300)
+    # time.sleep(0.1)
+    # screenhandler.focus_game_window('NIKKE')
+    # time.sleep(1)
     run()
