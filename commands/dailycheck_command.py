@@ -22,18 +22,18 @@ except Exception as e:
 
 class DailycheckCommand(Command):
     """
-    로그인 실행 커맨드
+    일일 출석 체크 커맨드
     """
     def execute(self):
-        log_manager.logger.info("로그인 실행 시작")
+        log_manager.logger.info("일일 출석 체크 실행 시작")
         try:
             dailycheck_run()
-            log_manager.logger.info("로그인 실행 완료")
+            log_manager.logger.info("일일 출석 체크 실행 완료")
         except Exception as e:
-            log_manager.logger.error(f"로그인 실행 중 오류 발생: {e}")
+            log_manager.logger.error(f"일일 출석 체크 실행 중 오류 발생: {e}")
 
 if __name__ == "__main__":
-    log_manager.logger.info("LoginCommand 테스트 시작")
+    log_manager.logger.info("DailycheckCommand 테스트 시작")
 
     # LoginCommand 인스턴스 생성
     command = DailycheckCommand()
@@ -58,5 +58,5 @@ if __name__ == "__main__":
     except Exception as e:
         log_manager.logger.error(f"실패 테스트에서 발생한 예외: {e}")
 
-    log_manager.logger.info("LoginCommand 테스트 종료")
+    log_manager.logger.info("DailycheckCommand 테스트 종료")
 
