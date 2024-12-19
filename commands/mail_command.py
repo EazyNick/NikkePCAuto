@@ -20,23 +20,23 @@ try:
 except Exception as e:
     print(f"임포트 실패: {e}")
 
-class ShopCommand(Command):
+class MailCommand(Command):
     """
-    캐시 상점 실행 커맨드
+    우편 받기 실행 커맨드
     """
     def execute(self):
-        log_manager.logger.info("캐시 상점 실행 시작")
+        log_manager.logger.info("우편 받기 실행 시작")
         try:
             outpost_run()
-            log_manager.logger.info("캐시 상점 실행 완료")
+            log_manager.logger.info("우편 받기 실행 완료")
         except Exception as e:
-            log_manager.logger.error(f"캐시 상점 실행 중 오류 발생: {e}")
+            log_manager.logger.error(f"우편 받기 실행 중 오류 발생: {e}")
 
 if __name__ == "__main__":
-    log_manager.logger.info("ShopCommand 테스트 시작")
+    log_manager.logger.info("MailCommand 테스트 시작")
 
     # LoginCommand 인스턴스 생성
-    command = ShopCommand()
+    command = MailCommand()
 
     # 성공 테스트
     try:
@@ -58,5 +58,5 @@ if __name__ == "__main__":
     except Exception as e:
         log_manager.logger.error(f"실패 테스트에서 발생한 예외: {e}")
 
-    log_manager.logger.info("ShopCommand 테스트 종료")
+    log_manager.logger.info("MailCommand 테스트 종료")
 

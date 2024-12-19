@@ -13,6 +13,7 @@ class PathManager:
             "assets_dailycheck": os.path.join(self.project_root, "assets", "dailycheck"),
             "assets_freind": os.path.join(self.project_root, "assets", "freind"),
             "assets_login": os.path.join(self.project_root, "assets", "login"),
+            "assets_mail": os.path.join(self.project_root, "assets", "mail"),
             "assets_outpost": os.path.join(self.project_root, "assets", "outpost"),
             "assets_shop": os.path.join(self.project_root, "assets", "shop"),
             "assets_temp": os.path.join(self.project_root, "assets", "temp"),

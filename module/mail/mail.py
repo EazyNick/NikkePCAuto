@@ -24,7 +24,7 @@ except Exception as e:
 
 def run():
     """
-    캐시 상점
+    우편 받기
     """
 
     screenhandler.resize_game_window('NIKKE', 2200, 1300)
@@ -32,18 +32,16 @@ def run():
     screenhandler.focus_game_window('NIKKE')
     time.sleep(1)
 
-    assets_login_path = path_manager.get_path("assets_shop")
+    assets_login_path = path_manager.get_path("assets_mail")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("캐시 상점 프로세스를 시작합니다.")
+    log_manager.logger.info("우편 받기 프로세스를 시작합니다.")
 
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
-        {"step": "1단계: 캐시 상점", "image_name_or_coords": "a_cashshop.png", "wait": 3},
-        {"step": "2단계: 선물", "image_name_or_coords": "b_present.png", "wait": 5},
-        {"step": "3단계: 일일", "image_name_or_coords": "c_daily.png", "wait": 3},
-        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 3},
-        {"step": "5단계: 터치하여 보상 수령", "image_name_or_coords": "e_exit.png", "wait": 3},
-        {"step": "6단계: 나가기", "image_name_or_coords": "f_back.png", "wait": 3},
+        {"step": "1단계: 우편", "image_name_or_coords": "a_mail.png", "wait": 3},
+        {"step": "2단계: 모두 받기", "image_name_or_coords": "b_getall.png", "wait": 3},
+        {"step": "3단계: 보상 받기", "image_name_or_coords": "c_getreward.png", "wait": 3},
+        {"step": "4단계: 나가기", "image_name_or_coords": "d_exit.png", "wait": 2},
     ]
 
     # 각 단계 실행

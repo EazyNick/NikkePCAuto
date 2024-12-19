@@ -1,7 +1,7 @@
 import os
 import sys
 
-# 프로젝트 루트 경로 추가
+
 current_file = os.path.abspath(__file__)
 project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
 sys.path.append(project_root)

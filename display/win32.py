@@ -4,8 +4,8 @@ import win32api
 import os
 import sys
 
-# 프로젝트 루트 경로 추가
-current_file = os.path.abspath(__file__)  # 현재 파일의 절대 경로
+
+current_file = os.path.abspath(__file__) 
 project_root = os.path.abspath(os.path.join(current_file, "..", ".."))
 sys.path.append(project_root)
 
