@@ -52,6 +52,7 @@ def run():
             step.get("double_click", False), 
             step.get("drag"),
             step.get("window_name"),
+            step.get("retry", 10),
             step["wait"]
         ):
             log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")

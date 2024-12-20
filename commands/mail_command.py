@@ -16,7 +16,7 @@ sys.path.append(path_manager.get_path("commands"))
 try:
     from logs import log_manager
     from commands import Command
-    from module import outpost_run
+    from module import mail_run
 except Exception as e:
     print(f"임포트 실패: {e}")
 
@@ -27,7 +27,7 @@ class MailCommand(Command):
     def execute(self):
         log_manager.logger.info("우편 받기 실행 시작")
         try:
-            outpost_run()
+            mail_run()
             log_manager.logger.info("우편 받기 실행 완료")
         except Exception as e:
             log_manager.logger.error(f"우편 받기 실행 중 오류 발생: {e}")

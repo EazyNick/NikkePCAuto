@@ -41,7 +41,8 @@ def run():
         {"step": "6단계: 웹페이지 종료", "window_name": "NIKKE", "image_name_or_coords": "f_exit.png", "wait": 1},
         {"step": "7단계: 게임 시작", "image_name_or_coords": "g_gamestart.png", "window_name": "NIKKE", "wait": 120},
         {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "wait": 20},
-        {"step": "9단계: 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "wait": 20},
+        {"step": "9단계: 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "wait": 3},
+        {"step": "9단계: 추가 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "retry": 3, "wait": 3},
     ]
 
     # 각 단계 실행
@@ -52,6 +53,7 @@ def run():
             step.get("double_click", False), 
             step.get("drag"),
             step.get("window_name"),
+            step.get("retry", 10),
             step["wait"]
         ):
             log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")

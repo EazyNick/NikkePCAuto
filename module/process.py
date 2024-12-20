@@ -36,7 +36,7 @@ class ProcessStep:
         self.base_path = base_path
         self.action_handler = ActionHandler()
 
-    def execute(self, step_name, image_name_or_coords, double_click=False, drag=None, window_name=None, wait_time=3):
+    def execute(self, step_name, image_name_or_coords, double_click=False, drag=None, window_name=None,retry=10, wait_time=3):
         """
         단계를 수행하는 메서드
 
@@ -46,6 +46,7 @@ class ProcessStep:
             double_click (bool): 더블 클릭 여부 (기본값: False)
             drag (dict): 드래그 동작 설정 {"start": (x1, y1), "end": (x2, y2), "duration": float}
             window_name (str): 포커스할 창 이름 (기본값: None)
+            retry (int): 이미지 매칭 실패 시 재시도 횟수 (기본값: 10)
             wait_time (int): 다음 단계로 넘어가기 전 대기 시간 (초, 기본값: 3)
 
         Returns:
@@ -65,21 +66,29 @@ class ProcessStep:
         elif drag is not None:  # drag가 dict가 아닌 다른 값일 경우 경고
             log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정으로, 무시됨: {drag}")
 
-        if isinstance(image_name_or_coords, tuple):
-            # 좌표를 클릭하는 경우
-            x, y = image_name_or_coords
-            if double_click:
-                self.action_handler.double_click(x, y)
-                log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 더블 클릭 완료")
+        for attempt in range(retry):
+            if isinstance(image_name_or_coords, tuple):
+                # 좌표를 클릭하는 경우
+                x, y = image_name_or_coords
+                if double_click:
+                    self.action_handler.double_click(x, y)
+                    log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 더블 클릭 완료")
+                else:
+                    self.action_handler.click(x, y)
+                    log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 클릭 완료")
+                break  # 좌표 클릭은 반복하지 않음
             else:
-                self.action_handler.click(x, y)
-                log_manager.logger.info(f"{step_name}: 좌표 ({x}, {y}) 클릭 완료")
+                # 템플릿 매칭을 사용하는 경우
+                template_path = os.path.join(self.base_path, image_name_or_coords)
+                if templateprocessor.process(template_path, double_click):
+                    log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
+                    break
+                else:
+                    log_manager.logger.warning(f"{step_name}: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})")
+                    time.sleep(1)
         else:
-            # 템플릿 매칭을 사용하는 경우
-            template_path = os.path.join(self.base_path, image_name_or_coords)
-            if not templateprocessor.process(template_path, double_click):
-                log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다.")
-                return False
+            log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾지 못했습니다.")
+            return False
 
         log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
         
