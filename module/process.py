@@ -11,7 +11,7 @@ from manage import PathManager
 
 path_manager = PathManager()
 sys.path.append(path_manager.get_path("logs"))
-sys.path.append(path_manager.get_path("assets_login"))
+sys.path.append(path_manager.get_path("assets_ark"))
 sys.path.append(path_manager.get_path("module"))
 sys.path.append(path_manager.get_path("display"))
 sys.path.append(path_manager.get_path("common"))
@@ -53,6 +53,16 @@ class ProcessStep:
             bool: 단계 수행 성공 여부
         """
         log_manager.logger.info(f"{step_name} 시작")
+
+        # 예외 현질 알림
+        try:
+            temp_path = os.path.join(self.base_path, "zz_event_exit.png")
+            if templateprocessor.process(temp_path, double_click):
+                log_manager.logger.info("zz_event_exit 템플릿 발견, 예외 처리 로직 실행")
+                self.run_exception_scenario()
+                log_manager.logger.info(f"{step_name} 완료: '{temp_path}' 아이콘 클릭 성공")
+        except Exception as e:
+            log_manager.logger.error(f"예외 처리 중 오류 발생: {e}")
 
         # 드래그 동작 수행
         if isinstance(drag, dict):  # drag가 dict인지 확인
@@ -100,8 +110,24 @@ class ProcessStep:
 
         time.sleep(wait_time)
         return True
+    
+    def run_exception_scenario(self):
+        """
+        캐시 구매 팝업 발견 시 실행할 예외 처리 로직
+        """
+        log_manager.logger.info("run_exception_scenario 실행")
+        # 여기에서 원하는 동작 수행
+        # 예: 특정 좌표 클릭, 다른 템플릿 탐색, 대기 등
+        _template_path = os.path.join(self.base_path, "zz_event_exit.png")
+        templateprocessor.process(_template_path)
+        time.sleep(2)
+        _template_path = os.path.join(self.base_path, "zz_event_exit2.png")
+        templateprocessor.process(_template_path)
+        log_manager.logger.info("예외 처리 로직 완료")
 
 if __name__ == "__main__":
+
+    sys.path.append(path_manager.get_path("assets_login"))
 
     def run():
         """
