@@ -81,12 +81,12 @@ if __name__ == "__main__":
 
     # 커맨드 등록
     # automation.register_command("login", LoginCommand())
-    # automation.register_command("dailycheck", DailycheckCommand())
-    # automation.register_command("freinds", FreindCommand())
-    # automation.register_command("outpost", OutpostCommand())
-    # automation.register_command("shop", ShopCommand())
-    # automation.register_command("mail", MailCommand())
-    # automation.register_command("ark", ArkCommand())
+    automation.register_command("dailycheck", DailycheckCommand())
+    automation.register_command("freinds", FreindCommand())
+    automation.register_command("outpost", OutpostCommand())
+    automation.register_command("shop", ShopCommand())
+    automation.register_command("mail", MailCommand())
+    automation.register_command("ark", ArkCommand())
     automation.register_command("favorite_run", Favoritecommand())
 
     # 자동화 시작
