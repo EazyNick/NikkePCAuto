@@ -105,7 +105,11 @@ class ExactMatchStrategy:
         # 임계값 설정
         threshold = 0.8
         if max_val >= threshold:
-            return True, max_loc
+            # 매칭된 영역의 중앙 좌표 계산
+            template_height, template_width = template_image.shape[:2]
+            center_x = max_loc[0] + template_width // 2
+            center_y = max_loc[1] + template_height // 2
+            return True, (center_x, center_y)
         else:
             return False, None
 
