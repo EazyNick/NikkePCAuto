@@ -34,6 +34,7 @@ class ProcessStep:
             base_path (str): 템플릿 이미지의 기본 경로
         """
         self.base_path = base_path
+        self.except_path = path_manager.get_path("assets_ark")
         self.action_handler = ActionHandler()
 
     def execute(self, step_name, image_name_or_coords, double_click=False, drag=None, window_name=None,retry=10, wait_time=3):
@@ -56,7 +57,7 @@ class ProcessStep:
 
         # 예외 현질 알림
         try:
-            temp_path = os.path.join(self.base_path, "zz_event_exit.png")
+            temp_path = os.path.join(self.except_path, "zz_event_exit.png")
             if templateprocessor.process(temp_path, double_click):
                 log_manager.logger.info("zz_event_exit 템플릿 발견, 예외 처리 로직 실행")
                 self.run_exception_scenario()

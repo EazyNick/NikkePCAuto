@@ -12,6 +12,7 @@ class PathManager:
         self.folders = {
             "assets_ark": os.path.join(self.project_root, "assets", "ark"),
             "assets_dailycheck": os.path.join(self.project_root, "assets", "dailycheck"),
+            "assets_favorite": os.path.join(self.project_root, "assets", "favorite"),
             "assets_freind": os.path.join(self.project_root, "assets", "freind"),
             "assets_login": os.path.join(self.project_root, "assets", "login"),
             "assets_mail": os.path.join(self.project_root, "assets", "mail"),

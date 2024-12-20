@@ -6,3 +6,4 @@ from .outpost_command import OutpostCommand
 from .shop_command import ShopCommand
 from .mail_command import MailCommand
 from .ark_command import ArkCommand
+from .favorite_command import Favoritecommand
