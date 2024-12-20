@@ -5,3 +5,4 @@ __pycache__/
 # Ignore temporary assets and logs
 assets/temp/*
 logs/log/*
+*.pyc
