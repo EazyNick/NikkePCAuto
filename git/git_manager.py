@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 from functools import cached_property
-from config_loader import DeployConfig 
+from .config_loader import DeployConfig 
 
 current_file = os.path.abspath(__file__)
 project_root = os.path.abspath(os.path.join(current_file, "..", ".."))

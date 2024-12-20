@@ -1,6 +1,8 @@
 from logs import log_manager
 from commands import *
 
+from git.git_manager import *
+
 class NikkeAutomation:
     """
     승리의 여신: 니케 자동화 프로그램
@@ -63,6 +65,17 @@ class NikkeAutomation:
 
 
 if __name__ == "__main__":
+    import subprocess
+
+    git_manager = GitManager()
+    pull_strategy = PullStrategy()
+
+    try:
+        pull_strategy.sync(git_manager)
+        print("레포지토리 동기화 성공!")
+    except Exception as e:
+        log_manager.logger.error(f"레포지토리 동기화 실패: {e}")
+
     # NikkeAutomation 클래스 인스턴스 생성
     automation = NikkeAutomation()
 
