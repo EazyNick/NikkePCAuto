@@ -57,6 +57,7 @@ pip install -r requirements.txt
 
 ## **사용 방법** 🚀
 V000_mian.py 70번째 줄 'automation.register_command("login", LoginCommand())' 주석처리 부탁드립니다.
+1. 바탕화면 우클릭 디스플레이 설정 > 배율 100%, 해상도 2560 X 1440 사용 
 ```
 main.py 실행 (현재는 V000_main.py 실행)
 ```

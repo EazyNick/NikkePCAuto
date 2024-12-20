@@ -41,11 +41,11 @@ def run():
         {"step": "2단계: 이벤트 이동", "image_name_or_coords": "b_move.png", "drag": {"start": (1250, 910), "end": (1250, 465), "duration": 1.0}, "wait": 3},
         {"step": "3단계: 이벤트 이동2", "image_name_or_coords": "c_move2.png", "wait": 6},
         {"step": "4단계: 확인", "image_name_or_coords": "d_ok.png", "wait": 2},
-        {"step": "1단계: 출석체크", "image_name_or_coords": "e_dailycheckgo.png", "wait": 5},
-        {"step": "2단계: 확인", "image_name_or_coords": "f_ok.png", "wait": 3},
-        {"step": "3단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
-        {"step": "3단계: 나가기2", "image_name_or_coords": (500, 300), "wait": 3},
-        {"step": "4단계: 나가기3", "image_name_or_coords": "h_exit.png", "wait": 3},
+        {"step": "5단계: 출석체크", "image_name_or_coords": "e_dailycheckgo.png", "wait": 5},
+        {"step": "6단계: 확인", "image_name_or_coords": "f_ok.png", "wait": 3},
+        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
+        {"step": "8단계: 나가기2", "image_name_or_coords": (500, 300), "wait": 3},
+        {"step": "9단계: 나가기3", "image_name_or_coords": "h_exit.png", "wait": 3},
     ]
 
     # 각 단계 실행

@@ -68,49 +68,53 @@ class ExactMatchStrategy:
     정확한(단순) 템플릿 매칭을 수행하는 전략 클래스.
     """
     def match(self, screen_image, template_image):
-        """
-        템플릿 매칭을 수행합니다.
+            """
+            템플릿 매칭을 수행합니다.
 
-        Args:
-            screen_image (str or numpy.ndarray): 화면 이미지 경로 또는 numpy 배열.
-            template_image (str or numpy.ndarray): 템플릿 이미지 경로 또는 numpy 배열.
+            Args:
+                screen_image (str or numpy.ndarray): 화면 이미지 경로 또는 numpy 배열.
+                template_image (str): 템플릿 이미지 파일명 (기본 이미지 경로).
 
-        Returns:
-            tuple: (is_match: bool, top_left: tuple or None) 매칭 여부와 매칭 좌표.
-        """
-        if screen_image is None:
-            raise ValueError(f"Screen image could not be loaded from {screen_image}")
-        if template_image is None:
-            raise ValueError(f"Template image could not be loaded from {template_image}")
+            Returns:
+                tuple: (is_match: bool, top_left: tuple or None) 매칭 여부와 매칭 좌표.
+            """
+            if isinstance(screen_image, str):
+                screen_image_data = cv2.imread(screen_image, cv2.IMREAD_GRAYSCALE)
+            else:
+                screen_image_data = screen_image
 
-        # 이미지 경로가 제공된 경우 파일을 로드
-        if isinstance(screen_image, str):
-            screen_image = cv2.imread(screen_image, cv2.IMREAD_GRAYSCALE)
-        if isinstance(template_image, str):
-            template_image = cv2.imread(template_image, cv2.IMREAD_GRAYSCALE)
+            if screen_image_data is None:
+                raise ValueError(f"Screen image could not be loaded from {screen_image}")
 
-        if screen_image is None:
-            raise ValueError(f"GRAYSCALE Screen image could not be loaded from {screen_image}")
-        if template_image is None:
-            raise ValueError(f"GRAYSCALE Template image could not be loaded from {template_image}")
+            # 템플릿 이미지 파일 이름 변형 리스트 생성
+            template_variations = [
+                template_image,
+                *[f"{template_image.split('.')[0]}{i}.png" for i in range(1, 3)]
+            ]
 
-        # 유효한 이미지인지 확인
-        if screen_image is None or template_image is None:
-            raise ValueError("Invalid image provided.")
+            for template_path in template_variations:
+                template_image_data = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
 
-        # 템플릿 매칭 수행
-        result = cv2.matchTemplate(screen_image, template_image, cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+                if template_image_data is None:
+                    log_manager.logger.warning(f"Template image could not be loaded from {template_path}, skipping...")
+                    continue
 
-        # 임계값 설정
-        threshold = 0.8
-        if max_val >= threshold:
-            # 매칭된 영역의 중앙 좌표 계산
-            template_height, template_width = template_image.shape[:2]
-            center_x = max_loc[0] + template_width // 2
-            center_y = max_loc[1] + template_height // 2
-            return True, (center_x, center_y)
-        else:
+                # 템플릿 매칭 수행
+                result = cv2.matchTemplate(screen_image_data, template_image_data, cv2.TM_CCOEFF_NORMED)
+                min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+                # 임계값 설정
+                threshold = 0.8
+                if max_val >= threshold:
+                    # 매칭된 영역의 중앙 좌표 계산
+                    template_height, template_width = template_image_data.shape[:2]
+                    center_x = max_loc[0] + template_width // 2
+                    center_y = max_loc[1] + template_height // 2
+                    log_manager.logger.info(f"Template matched: {template_path} with confidence {max_val}")
+                    return True, (center_x, center_y)
+
+            # 모든 템플릿 이미지에서 매칭 실패
+            log_manager.logger.info("No matching template found.")
             return False, None
 
 if __name__ == "__main__":
@@ -136,3 +140,32 @@ if __name__ == "__main__":
             log_manager.logger.info("Template did not match.")
     except ValueError as e:
         log_manager.logger.info(f"Error during matching: {e}")
+
+    def run():
+        """
+        방주
+        """
+
+        assets_login_path = path_manager.get_path("assets_ark")
+        process_step = matcher.match_template(base_path=assets_login_path)
+        log_manager.logger.info("방주 프로세스를 시작합니다.")
+
+        # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
+        steps = [
+            {"step": "1단계: 방주 이동", "image_name_or_coords": "d_start.png", "wait": 3},
+        ]
+
+        # 각 단계 실행
+        for step in steps:
+            if not process_step.execute(
+                step["step"], 
+                step["image_name_or_coords"], 
+                step.get("double_click", False), 
+                step.get("drag"),
+                step.get("window_name"),
+                step.get("retry", 10),
+                step["wait"]
+            ):
+                log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
+                return  # 단계 실패 시 함수 종료
+    run()

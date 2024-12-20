@@ -9,6 +9,7 @@ from .freind.freind import run as freind_run
 from .outpost.outpost import run as outpost_run
 from .shop.shop import run as shop_run
 from .mail.mail import run as mail_run
+from .ark.ark_trivetower import run as ark_trivetower_run
 
 __all__ = ['templateprocessor',
             'ProcessStep',
@@ -17,4 +18,5 @@ __all__ = ['templateprocessor',
             'freind_run',
             'outpost_run',
             'shop_run',
-            'mail_run',]
+            'mail_run',
+            'ark_trivetower_run',]
