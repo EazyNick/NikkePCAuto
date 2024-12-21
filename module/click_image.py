@@ -75,7 +75,7 @@ class TemplateProcessor:
                 self.action_handler.click(x=location[0], y=location[1])
                 log_manager.logger.info("단일 클릭 수행 완료")
 
-            # 4. 강조된 스크린샷 저장
+            # 4. 클릭 좌표 스크린샷 저장
             highlighted_path = click_and_save_with_highlight(location)
             log_manager.logger.info(f"클릭 스크린샷 저장 완료: {highlighted_path}")
 

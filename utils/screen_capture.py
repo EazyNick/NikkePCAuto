@@ -51,7 +51,7 @@ def capture_screen():
 
 def click_and_save_with_highlight(coords):
     """
-    현재 화면을 다시 캡처하여 좌표를 클릭한 위치를 강조 표시하고, 저장합니다.
+    temp 폴더의 가장 최근에 생성된 이미지를 불러와 좌표를 클릭한 위치를 강조 표시하고, 저장합니다.
 
     Args:
         coords (tuple): (x, y) 클릭 좌표.
@@ -59,17 +59,29 @@ def click_and_save_with_highlight(coords):
     Returns:
         str: 강조 표시된 새 스크린샷의 파일 경로.
     """
-    # 현재 화면 캡처
     # 루트 디렉토리 설정 (NikkePCAuto)
     current_file = os.path.abspath(__file__)  # 현재 파일 절대 경로
     base_dir = os.path.abspath(os.path.join(current_file, "..", ".."))  # 루트 디렉토리 경로
     temp_dir = os.path.join(base_dir, "assets", "temp")
     os.makedirs(temp_dir, exist_ok=True)  # 디렉토리가 없으면 생성
 
-    screenshot = pyautogui.screenshot()
+    # temp 폴더에서 가장 최근에 생성된 PNG 파일 찾기
+    try:
+        png_files = [
+            os.path.join(temp_dir, f) for f in os.listdir(temp_dir) if f.endswith(".png")
+        ]
+        if not png_files:
+            raise FileNotFoundError("temp 폴더에 PNG 파일이 존재하지 않습니다.")
+        latest_file = max(png_files, key=os.path.getctime)
+    except Exception as e:
+        log_manager.logger.error(f"최근 파일 검색 중 오류 발생: {e}")
+        return None
 
-    # 이미지를 OpenCV 형식으로 변환
-    image = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+    # 이미지를 OpenCV 형식으로 불러오기
+    image = cv2.imread(latest_file)
+    if image is None:
+        log_manager.logger.error(f"이미지를 불러올 수 없습니다: {latest_file}")
+        return None
 
     # 클릭 좌표 강조 표시 (십자 표시)
     x, y = coords
