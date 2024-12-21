@@ -55,6 +55,12 @@ class ProcessStep:
         """
         log_manager.logger.info(f"{step_name} 시작")
 
+        # ALT+F4 동작 처리
+        if image_name_or_coords == "ALT+F4":
+            log_manager.logger.info(f"{step_name}: ALT+F4 키 입력 실행")
+            self.action_handler.press_alt_f4()
+            return True
+
         # 예외 현질 알림
         try:
             temp_path = os.path.join(self.except_path, "zz_event_exit.png")
@@ -119,10 +125,10 @@ class ProcessStep:
         log_manager.logger.info("run_exception_scenario 실행")
         # 여기에서 원하는 동작 수행
         # 예: 특정 좌표 클릭, 다른 템플릿 탐색, 대기 등
-        _template_path = os.path.join(self.base_path, "zz_event_exit.png")
+        _template_path = os.path.join(self.except_path, "zz_event_exit.png")
         templateprocessor.process(_template_path)
         time.sleep(2)
-        _template_path = os.path.join(self.base_path, "zz_event_exit2.png")
+        _template_path = os.path.join(self.except_path, "zz_event_exit2.png")
         templateprocessor.process(_template_path)
         log_manager.logger.info("예외 처리 로직 완료")
 

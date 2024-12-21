@@ -83,6 +83,13 @@ class ActionHandler:
         pyautogui.dragTo(end_x, end_y, duration=duration)
         log_manager.logger.info(f"Dragged from ({start_x}, {start_y}) to ({end_x}, {end_y}) in {duration} seconds")
 
+    def press_alt_f4(self):
+        """
+        ALT+F4 키 입력을 실행합니다.
+        """
+        pyautogui.hotkey('alt', 'f4')
+        log_manager.logger.info("ALT+F4 키 입력 완료")
+
 if __name__ == "__main__":
     # TemplateMatcher 인스턴스 생성
     # 현재 화면 캡처 및 템플릿 경로 설정

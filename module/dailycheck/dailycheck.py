@@ -43,9 +43,10 @@ def run():
         {"step": "4단계: 확인", "image_name_or_coords": "d_ok.png", "wait": 2},
         {"step": "5단계: 출석체크", "image_name_or_coords": "e_dailycheckgo.png", "wait": 5},
         {"step": "6단계: 확인", "image_name_or_coords": "f_ok.png", "wait": 3},
-        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
-        {"step": "8단계: 나가기2", "image_name_or_coords": (500, 300), "wait": 3},
-        {"step": "9단계: 나가기3", "image_name_or_coords": "h_exit.png", "wait": 3},
+        {"step": "7단계: 공유 이벤트 닫기", "image_name_or_coords": "g_x.png", "window_name": "INTL Webview", "wait": 3},
+        {"step": "8단계: 나가기1", "image_name_or_coords": "ALT+F4", "wait": 3},
+        {"step": "9단계: 나가기2", "image_name_or_coords": (500, 300), "wait": 3},
+        {"step": "10단계: 나가기3", "image_name_or_coords": "i_exit.png", "wait": 3},
     ]
 
     # 각 단계 실행

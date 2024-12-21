@@ -39,9 +39,9 @@ def run():
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
         {"step": "1단계: 캐시 상점", "image_name_or_coords": "a_cashshop.png", "wait": 3},
-        {"step": "2단계: 선물", "image_name_or_coords": "b_present.png", "wait": 5},
-        {"step": "3단계: 일일", "image_name_or_coords": "c_daily.png", "wait": 3},
-        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 3},
+        {"step": "2단계: 선물", "image_name_or_coords": "b_present.png", "wait": 2},
+        {"step": "3단계: 일일", "image_name_or_coords": "c_daily.png", "wait": 2},
+        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 4},
         {"step": "5단계: 터치하여 보상 수령", "image_name_or_coords": "e_exit.png", "wait": 3},
         {"step": "6단계: 나가기", "image_name_or_coords": "f_back.png", "wait": 3},
     ]

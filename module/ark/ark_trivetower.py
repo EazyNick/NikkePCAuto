@@ -39,7 +39,7 @@ def run():
     steps = [
         {"step": "1단계: 방주 이동", "image_name_or_coords": "a_ark.png", "wait": 3},
         {"step": "2단계: 트라이브 타워", "image_name_or_coords": "b_trivetower.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png", "wait": 6},
+        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png", "wait": 3},
         {"step": "4단계: 시작", "image_name_or_coords": (1246, 620), "wait": 2},
         {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 60, "wait": 50},
         {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 60},
