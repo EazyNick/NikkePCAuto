@@ -104,7 +104,7 @@ class ExactMatchStrategy:
                 min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
                 # 임계값 설정
-                threshold = 0.8
+                threshold = 0.9
                 if max_val >= threshold:
                     # 매칭된 영역의 중앙 좌표 계산
                     template_height, template_width = template_image_data.shape[:2]
@@ -112,6 +112,9 @@ class ExactMatchStrategy:
                     center_y = max_loc[1] + template_height // 2
                     log_manager.logger.info(f"Template matched: {template_path} with confidence {max_val}")
                     return True, (center_x, center_y)
+                else:
+                    log_manager.logger.info(f"템플릿 매칭 실패 - 매칭값: {max_val}, 쓰레시홀드: {threshold}")
+                    return False, None
 
             # 모든 템플릿 이미지에서 매칭 실패
             log_manager.logger.info("No matching template found.")

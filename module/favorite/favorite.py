@@ -88,7 +88,7 @@ def run():
             step.get("retry", 3),
             step["wait"]
         )
-        log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
+        log_manager.logger.warn(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 재시작")
 
 if __name__ == "__main__":
     run()

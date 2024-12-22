@@ -42,32 +42,32 @@ def run():
         {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png", "wait": 3},
         {"step": "4단계: 시작", "image_name_or_coords": (1246, 620), "wait": 2},
         {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 60, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 60},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 50},
         {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 0, "wait": 6},
+        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
+        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
         {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
+        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
         {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png","retry": 1, "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 0, "wait": 6},
+        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
+        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
         {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
+        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
         {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png","retry": 1, "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 0, "wait": 6},
+        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
+        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
         {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 60},
+        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
+        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
         {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
         {"step": "8단계: 나가기2", "image_name_or_coords": "h_back", "wait": 3},
+        {"step": "8단계: 나가기1", "image_name_or_coords": "i_home.png", "wait": 3},
     ]
 
     # 각 단계 실행
@@ -81,8 +81,27 @@ def run():
             step.get("retry", 10),
             step["wait"]
         ):
-            log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-            return  # 단계 실패 시 함수 종료
+            # 추가 단계 설정
+            additional_steps = [
+                {"step": "뒤로가기", "image_name_or_coords": "h_back.png", "wait": 3},
+                {"step": "홈", "image_name_or_coords": "i_home.png", "wait": 3},
+            ]
+
+            # 추가 단계 실행
+            for add_step in additional_steps:
+                if not process_step.execute(
+                    add_step["step"], 
+                    add_step["image_name_or_coords"], 
+                    add_step.get("double_click", False), 
+                    add_step.get("drag"),
+                    add_step.get("window_name"),
+                    add_step.get("retry", 5),
+                    add_step["wait"]
+                ):
+                    log_manager.logger.error(f"{add_step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
+                    return  # 추가 단계 실패 시 종료
+
+            return  # `execute` 실패 시 종료
 
 if __name__ == "__main__":
     run()

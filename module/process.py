@@ -79,7 +79,7 @@ class ProcessStep:
             if start and end:
                 log_manager.logger.info(f"{step_name}: 드래그 수행 {start} -> {end} (duration: {duration}s)")
                 self.action_handler.drag(start[0], start[1], end[0], end[1], duration)
-                time.sleep(1)
+                time.sleep(2)
         elif drag is not None:  # drag가 dict가 아닌 다른 값일 경우 경고
             log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정으로, 무시됨: {drag}")
 
@@ -106,8 +106,6 @@ class ProcessStep:
         else:
             log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾지 못했습니다.")
             return False
-
-        log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
         
         # 창 포커스
         if window_name:

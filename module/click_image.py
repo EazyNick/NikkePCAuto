@@ -56,7 +56,7 @@ class TemplateProcessor:
         try:
             # 1. 화면 캡처
             captured_screen_path = capture_screen()
-            log_manager.logger.info(f"화면 캡처 완료: {captured_screen_path}")
+            # log_manager.logger.debug(f"화면 캡처 완료: {captured_screen_path}")
 
             # 2. 템플릿 매칭
             is_match, location = self.matcher.match_template(captured_screen_path, template_path)
@@ -77,7 +77,7 @@ class TemplateProcessor:
 
             # 4. 클릭 좌표 스크린샷 저장
             highlighted_path = click_and_save_with_highlight(location)
-            log_manager.logger.info(f"클릭 스크린샷 저장 완료: {highlighted_path}")
+            # log_manager.logger.debug(f"클릭 스크린샷 저장 완료: {highlighted_path}")
 
             return True
 
