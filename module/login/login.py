@@ -33,14 +33,14 @@ def run():
 
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
-        {"step": "1단계: 니케 아이콘 클릭", "image_name_or_coords": "a_icon.png", "double_click": True, "wait": 5},
-        {"step": "2단계: 구글 로그인", "image_name_or_coords": "b_google.png", "window_name": "로그인 - Google 계정 - Chrome", "wait": 2},
+        {"step": "1단계: 니케 아이콘 클릭", "image_name_or_coords": "a_icon.png", "double_click": True, "wait": 1},
+        {"step": "2단계: 구글 로그인", "image_name_or_coords": "b_google.png", "window_name": "로그인 - Google 계정 - Chrome", "wait": 1},
         {"step": "3단계: 아이디 로그인", "image_name_or_coords": "c_google_login.png", "wait": 2},
-        {"step": "4단계: 계속", "image_name_or_coords": "d_keep_going.png", "wait": 4},
+        {"step": "4단계: 계속", "image_name_or_coords": "d_keep_going.png", "wait": 2},
         # {"step": "5단계: 페이지 닫기", "image_name_or_coords": "e_closepage.png", "wait": 3},
         {"step": "6단계: 웹페이지 종료", "window_name": "NIKKE", "image_name_or_coords": "f_exit.png", "wait": 1},
-        {"step": "7단계: 게임 시작", "image_name_or_coords": "g_gamestart.png", "window_name": "NIKKE", "wait": 130},
-        {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "wait": 25},
+        {"step": "7단계: 게임 시작", "image_name_or_coords": "g_gamestart.png","retry": 100, "window_name": "NIKKE", "wait": 100},
+        {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "wait": 20},
         {"step": "9단계: 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "wait": 1},
         {"step": "9단계: 추가 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "retry": 3, "wait": 1},
     ]

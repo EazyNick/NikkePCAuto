@@ -94,7 +94,7 @@ class ExactMatchStrategy:
 
             for template_path in template_variations:
                 template_image_data = cv2.imread(template_path, cv2.IMREAD_GRAYSCALE)
-
+                print(template_path)
                 if template_image_data is None:
                     log_manager.logger.warning(f"Template image could not be loaded from {template_path}, skipping...")
                     continue
@@ -114,7 +114,8 @@ class ExactMatchStrategy:
                     return True, (center_x, center_y)
                 else:
                     log_manager.logger.info(f"템플릿 매칭 실패 - 매칭값: {max_val}, 쓰레시홀드: {threshold}")
-                    return False, None
+                
+            return False, None
 
             # 모든 템플릿 이미지에서 매칭 실패
             log_manager.logger.info("No matching template found.")
