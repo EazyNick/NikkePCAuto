@@ -36,32 +36,11 @@ def run():
     process_step = ProcessStep(base_path=assets_login_path)
     log_manager.logger.info("친구 자동화 프로세스를 시작합니다.")
 
-    # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
-    steps = [
-        {"step": "1단계: 친구 목록 클릭", "image_name_or_coords": "a_freiend.png", "wait": 3},
-        {"step": "2단계: 하트 보내기", "image_name_or_coords": "b_sendhart.png", "wait": 2},
-        {"step": "3단계: 확인", "image_name_or_coords": "c_ok.png", "wait": 2},
-        {"step": "4단계: 나가기", "image_name_or_coords": "d_exit.png", "wait": 2},
-    ]
-
-    # 각 단계 실행
-    for step in steps:
-        process_step.execute(
-            step["step"], 
-            step["image_name_or_coords"], 
-            step.get("double_click", False), 
-            step.get("drag"),
-            step.get("window_name"),
-            step.get("retry", 10),
-            step["wait"]
-        )
-        log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-
-    # # 추가 동작: 게임 창 포커스 및 크기 조정
-    # resize_game_window('NIKKE', 2200, 1300)
-    # time.sleep(0.1)
-    # focus_game_window('NIKKE')
-    # time.sleep(1)
+    # 단계별 실행
+    process_step.execute_click("1단계: 친구 목록 클릭", "a_freiend.png", wait_time=3)
+    process_step.execute_click("2단계: 하트 보내기", "b_sendhart.png", wait_time=2)
+    process_step.execute_click("3단계: 확인", "c_ok.png", wait_time=2)
+    process_step.execute_click("4단계: 나가기", "d_exit.png", wait_time=2)
 
 if __name__ == "__main__":
     run()

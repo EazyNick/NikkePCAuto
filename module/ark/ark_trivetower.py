@@ -35,73 +35,40 @@ def run():
     process_step = ProcessStep(base_path=assets_login_path)
     log_manager.logger.info("방주 프로세스를 시작합니다.")
 
-    # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
-    steps = [
-        {"step": "1단계: 방주 이동", "image_name_or_coords": "a_ark.png", "wait": 3},
-        {"step": "2단계: 트라이브 타워", "image_name_or_coords": "b_trivetower.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png", "wait": 3},
-        {"step": "4단계: 시작", "image_name_or_coords": (1246, 620), "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 60, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 60, "wait": 50},
-        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
-        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
-        {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png","retry": 1, "wait": 3},
-        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
-        {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png","retry": 1, "wait": 3},
-        {"step": "8단계: 나가기1", "image_name_or_coords": "h_back.png", "wait": 3},
-        {"step": "3단계: 열린 타워로 이동", "image_name_or_coords": "c_dailyclear.png","retry": 6, "wait": 6},
-        {"step": "4단계: 시작", "image_name_or_coords": (1246, 620),"retry": 1, "wait": 2},
-        {"step": "5단계: 전투진입", "image_name_or_coords": "e_ingame.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "6단계: 다음 스테이지", "image_name_or_coords": "f_nextstage.png","retry": 1, "wait": 50},
-        {"step": "7단계: 나가기1", "image_name_or_coords": "g_exit.png", "wait": 3},
-        {"step": "8단계: 나가기2", "image_name_or_coords": "h_back", "wait": 3},
-        {"step": "8단계: 나가기1", "image_name_or_coords": "i_home.png", "wait": 3},
-    ]
+    process_step.execute_click("1단계: 방주 이동", "a_ark.png", wait_time=3)
+    process_step.execute_click("2단계: 트라이브 타워", "b_trivetower.png", wait_time=3)
+    process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", wait_time=3)
+    process_step.execute_click("4단계: 시작", (1246, 620), wait_time=2)
+    process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=60, wait_time=50)
+    process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+    process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+    process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+    process_step.execute_click("8단계: 뒤로가기", "h_back.png", wait_time=3)
 
-    # 각 단계 실행
-    for step in steps:
-        if not process_step.execute(
-            step["step"], 
-            step["image_name_or_coords"], 
-            step.get("double_click", False), 
-            step.get("drag"),
-            step.get("window_name"),
-            step.get("retry", 10),
-            step["wait"]
-        ):
-            # 추가 단계 설정
-            additional_steps = [
-                {"step": "뒤로가기", "image_name_or_coords": "h_back.png", "wait": 3},
-                {"step": "홈", "image_name_or_coords": "i_home.png", "wait": 3},
-            ]
+    if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+        process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+        process_step.execute_click("8단계: 뒤로가기", "h_back.png", wait_time=3)
 
-            # 추가 단계 실행
-            for add_step in additional_steps:
-                if not process_step.execute(
-                    add_step["step"], 
-                    add_step["image_name_or_coords"], 
-                    add_step.get("double_click", False), 
-                    add_step.get("drag"),
-                    add_step.get("window_name"),
-                    add_step.get("retry", 5),
-                    add_step["wait"]
-                ):
-                    log_manager.logger.error(f"{add_step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-                    return  # 추가 단계 실패 시 종료
-
-            return  # `execute` 실패 시 종료
+    if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+        process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+        process_step.execute_click("8단계: 뒤로가기", "h_back.png", wait_time=3)
+    
+    if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+        process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
+        process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+        process_step.execute_click("8단계: 뒤로가기", "h_back", wait_time=3)
+    process_step.execute_click("8단계: 홈", "i_home.png", wait_time=3)
 
 if __name__ == "__main__":
     run()

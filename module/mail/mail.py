@@ -36,27 +36,11 @@ def run():
     process_step = ProcessStep(base_path=assets_login_path)
     log_manager.logger.info("우편 받기 프로세스를 시작합니다.")
 
-    # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
-    steps = [
-        {"step": "1단계: 우편", "image_name_or_coords": "a_mail.png", "wait": 3},
-        {"step": "2단계: 모두 받기", "image_name_or_coords": "b_getall.png", "wait": 3},
-        {"step": "3단계: 보상 받기", "image_name_or_coords": "c_getreward.png", "wait": 3},
-        {"step": "4단계: 나가기", "image_name_or_coords": "d_exit.png", "wait": 2},
-    ]
-
-    # 각 단계 실행
-    for step in steps:
-        if not process_step.execute(
-            step["step"], 
-            step["image_name_or_coords"], 
-            step.get("double_click", False), 
-            step.get("drag"),
-            step.get("window_name"),
-            step.get("retry", 10),
-            step["wait"]
-        ):
-            log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-            return  # 단계 실패 시 함수 종료
+    # 단계별 실행
+    process_step.execute_click("1단계: 우편", "a_mail.png", wait_time=3)
+    process_step.execute_click("2단계: 모두 받기", "b_getall.png", wait_time=3)
+    process_step.execute_click("3단계: 보상 받기", "c_getreward.png", wait_time=3)
+    process_step.execute_click("4단계: 나가기", "d_exit.png", wait_time=2)
 
 if __name__ == "__main__":
     run()

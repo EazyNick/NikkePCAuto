@@ -36,33 +36,16 @@ def run():
     process_step = ProcessStep(base_path=assets_login_path)
     log_manager.logger.info("캐시 상점 프로세스를 시작합니다.")
 
-    # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
-    steps = [
-        {"step": "1단계: 캐시 상점", "image_name_or_coords": "a_cashshop.png", "wait": 3},
-        {"step": "2단계: 선물", "image_name_or_coords": "b_present.png", "wait": 2},
-        {"step": "3단계: 일일", "image_name_or_coords": "c_daily.png", "wait": 2},
-        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 2},
-        {"step": "5단계: 터치하여 보상 수령", "image_name_or_coords": "e_exit.png", "wait": 2},
-        {"step": "6단계: 주간", "image_name_or_coords": "f_weekly.png","retry": 1, "wait": 2},
-        {"step": "7단계: 무료", "image_name_or_coords": "g_weeklyfree.png","retry": 1, "wait": 2},
-        {"step": "8단계: 터치하여 보상 수령", "image_name_or_coords": "h_exit.png","retry": 1, "wait": 2},
-        {"step": "6단계: 나가기", "image_name_or_coords": "f_back.png", "wait": 3},
-    ]
-
-    # 각 단계 실행
-    for step in steps:
-        process_step.execute(
-            step["step"], 
-            step["image_name_or_coords"], 
-            step.get("double_click", False), 
-            step.get("drag"),
-            step.get("window_name"),
-            step.get("retry", 10),
-            step["wait"]
-        )
-    else:
-        log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-
+    # 단계별 실행
+    process_step.execute_click("1단계: 캐시 상점", "a_cashshop.png", wait_time=3)
+    process_step.execute_click("2단계: 선물", "b_present.png", wait_time=2)
+    process_step.execute_click("3단계: 일일", "c_daily.png", wait_time=2)
+    process_step.execute_click("4단계: 무료", "d_dailyfree.png", wait_time=2)
+    process_step.execute_click("5단계: 터치하여 보상 수령", "e_exit.png", wait_time=2)
+    process_step.execute_click("6단계: 주간", "f_weekly.png", retry=1, wait_time=2)
+    process_step.execute_click("7단계: 무료", "g_weeklyfree.png", retry=1, wait_time=2)
+    process_step.execute_click("8단계: 터치하여 보상 수령", "h_exit.png", retry=1, wait_time=2)
+    process_step.execute_click("6단계: 나가기", "f_back.png", wait_time=3)
 
 if __name__ == "__main__":
     run()
