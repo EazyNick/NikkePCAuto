@@ -16,7 +16,7 @@ sys.path.append(path_manager.get_path("common"))
 
 try:
     from utils import capture_screen
-    from common.V000 import matcher
+    from common import matcher
     from logs import log_manager
 except Exception as e:
     print(f"임포트 실패: {e}")

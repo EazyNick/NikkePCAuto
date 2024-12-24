@@ -19,7 +19,7 @@ sys.path.append(path_manager.get_path("common"))
 try:
     from logs import log_manager
     from module import templateprocessor
-    from common.V000 import ActionHandler
+    from common import ActionHandler
     from display import screenhandler
 except Exception as e:
     print(f"임포트 실패: {e}")

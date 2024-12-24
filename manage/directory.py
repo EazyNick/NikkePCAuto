@@ -22,7 +22,6 @@ class PathManager:
             "assets_test": os.path.join(self.project_root, "assets", "test"),
             "commands": os.path.join(self.project_root, "commands"),
             "common": os.path.join(self.project_root, "common"),
-            "common_V000": os.path.join(self.project_root, "common", "V000"),
             "display": os.path.join(self.project_root, "display"),  
             "git": os.path.join(self.project_root, "git"),
             "logs": os.path.join(self.project_root, "logs"),  # 로그 폴더가 필요한 경우
