@@ -83,12 +83,23 @@ class ActionHandler:
         pyautogui.dragTo(end_x, end_y, duration=duration)
         log_manager.logger.info(f"Dragged from ({start_x}, {start_y}) to ({end_x}, {end_y}) in {duration} seconds")
 
-    def press_alt_f4(self):
+    def press_key(self, key):
         """
-        ALT+F4 키 입력을 실행합니다.
+        지정된 키 또는 키 조합을 입력합니다.
+
+        Args:
+            key (str or tuple): 입력할 키(예: 'a') 또는 키 조합 튜플(예: ('alt', 'f4')).
         """
-        pyautogui.hotkey('alt', 'f4')
-        log_manager.logger.info("ALT+F4 키 입력 완료")
+        try:
+            import pyautogui
+            if isinstance(key, tuple):
+                pyautogui.hotkey(*key)
+                log_manager.logger.info(f"Hotkey pressed: {' + '.join(key)}")
+            else:
+                pyautogui.press(key)
+                log_manager.logger.info(f"Key pressed: {key}")
+        except Exception as e:
+            log_manager.logger.error(f"키 입력 중 오류 발생: {e}")
 
 if __name__ == "__main__":
     # TemplateMatcher 인스턴스 생성
@@ -117,7 +128,13 @@ if __name__ == "__main__":
         action_handler.move_to(x=location[0] + 100, y=location[1] + 100)
 
         # 드래그 예시
-        action_handler.drag_to(x=location[0] + 200, y=location[1] + 200)
+        action_handler.drag(x=location[0] + 200, y=location[1] + 200)
+
+        # 키 입력 예시 (단일 키)
+        action_handler.press_key('enter')
+
+        # 키 입력 예시 (조합 키)
+        action_handler.press_key(('alt', 'f4'))
     else:
         log_manager.logger.info("Template did not match.")
 
