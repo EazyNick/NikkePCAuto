@@ -1,8 +1,8 @@
-from .click_image import TemplateProcessor
+from .click_image_v1 import TemplateProcessor
 
 templateprocessor = TemplateProcessor()
 
-from .process import ProcessStep
+from .process_v1 import ProcessStep
 from .dailycheck.dailycheck import run as dailycheck_run
 from .login.login import run as login_run
 from .freind.freind import run as freind_run
