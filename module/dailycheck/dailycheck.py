@@ -38,7 +38,7 @@ def run():
     # 단계별 설정 (단계 이름, 이미지 파일명, 더블클릭 여부, 대기 시간)
     steps = [
         {"step": "1단계: 알람 아이콘 클릭", "image_name_or_coords": "a_alert.png", "wait": 1},
-        {"step": "2단계: 이벤트 이동", "image_name_or_coords": "b_move.png", "drag": {"start": (1250, 910), "end": (1250, 465), "duration": 1.0}, "wait": 3},
+        {"step": "2단계: 이벤트 이동", "image_name_or_coords": "b_move.png", "drag": {"start": (1250, 910), "end": (1250, 465), "duration": 1.5}, "wait": 3},
         {"step": "3단계: 이벤트 이동2", "image_name_or_coords": "c_move2.png", "wait": 1},
         {"step": "4단계: 확인", "image_name_or_coords": "d_ok.png", "wait": 1},
         {"step": "5단계: 출석체크", "image_name_or_coords": "e_dailycheckgo.png", "wait": 1},

@@ -41,14 +41,17 @@ def run():
         {"step": "1단계: 캐시 상점", "image_name_or_coords": "a_cashshop.png", "wait": 3},
         {"step": "2단계: 선물", "image_name_or_coords": "b_present.png", "wait": 2},
         {"step": "3단계: 일일", "image_name_or_coords": "c_daily.png", "wait": 2},
-        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 4},
-        {"step": "5단계: 터치하여 보상 수령", "image_name_or_coords": "e_exit.png", "wait": 3},
+        {"step": "4단계: 무료", "image_name_or_coords": "d_dailyfree.png", "wait": 2},
+        {"step": "5단계: 터치하여 보상 수령", "image_name_or_coords": "e_exit.png", "wait": 2},
+        {"step": "6단계: 주간", "image_name_or_coords": "f_weekly.png","retry": 1, "wait": 2},
+        {"step": "7단계: 무료", "image_name_or_coords": "g_weeklyfree.png","retry": 1, "wait": 2},
+        {"step": "8단계: 터치하여 보상 수령", "image_name_or_coords": "h_exit.png","retry": 1, "wait": 2},
         {"step": "6단계: 나가기", "image_name_or_coords": "f_back.png", "wait": 3},
     ]
 
     # 각 단계 실행
     for step in steps:
-        if not process_step.execute(
+        process_step.execute(
             step["step"], 
             step["image_name_or_coords"], 
             step.get("double_click", False), 
@@ -56,9 +59,10 @@ def run():
             step.get("window_name"),
             step.get("retry", 10),
             step["wait"]
-        ):
-            log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-            return  # 단계 실패 시 함수 종료
+        )
+    else:
+        log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
+
 
 if __name__ == "__main__":
     run()

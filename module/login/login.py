@@ -37,17 +37,17 @@ def run():
         {"step": "2단계: 구글 로그인", "image_name_or_coords": "b_google.png", "window_name": "로그인 - Google 계정 - Chrome", "wait": 1},
         {"step": "3단계: 아이디 로그인", "image_name_or_coords": "c_google_login.png", "wait": 2},
         {"step": "4단계: 계속", "image_name_or_coords": "d_keep_going.png", "wait": 2},
-        # {"step": "5단계: 페이지 닫기", "image_name_or_coords": "e_closepage.png", "wait": 3},
         {"step": "6단계: 웹페이지 종료", "window_name": "NIKKE", "image_name_or_coords": "f_exit.png", "wait": 1},
         {"step": "7단계: 게임 시작", "image_name_or_coords": "g_gamestart.png","retry": 100, "window_name": "NIKKE", "wait": 100},
-        {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "wait": 20},
+        {"step": "5단계: 페이지 닫기", "image_name_or_coords": "h_btn_X.png", "wait": 3},
+        {"step": "8단계: 게임 접속", "image_name_or_coords": "h_ingame.png", "retry": 100, "wait": 20},
         {"step": "9단계: 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "wait": 1},
         {"step": "9단계: 추가 공지사항 닫기", "image_name_or_coords": "i_btn_X.png", "retry": 3, "wait": 1},
     ]
 
     # 각 단계 실행
     for step in steps:
-        if not process_step.execute(
+        process_step.execute(
             step["step"], 
             step["image_name_or_coords"], 
             step.get("double_click", False), 
@@ -55,9 +55,9 @@ def run():
             step.get("window_name"),
             step.get("retry", 10),
             step["wait"]
-        ):
-            log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
-            return  # 단계 실패 시 함수 종료
+        )
+    else:
+        log_manager.logger.error(f"{step.get('step', '단계 이름 없음')} 실패로 자동화 종료")
 
     # 추가 동작: 게임 창 포커스 및 크기 조정
     screenhandler.resize_game_window('NIKKE', 2200, 1300)

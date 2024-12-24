@@ -104,7 +104,7 @@ class ExactMatchStrategy:
                 min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
                 # 임계값 설정
-                threshold = 0.9
+                threshold = 0.91
                 if max_val >= threshold:
                     # 매칭된 영역의 중앙 좌표 계산
                     template_height, template_width = template_image_data.shape[:2]
