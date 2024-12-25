@@ -11,6 +11,7 @@ from manage import PathManager
 
 path_manager = PathManager()
 sys.path.append(path_manager.get_path("logs"))
+sys.path.append(path_manager.get_path("utils"))
 sys.path.append(path_manager.get_path("assets_ark"))
 sys.path.append(path_manager.get_path("module"))
 sys.path.append(path_manager.get_path("display"))
@@ -21,6 +22,7 @@ try:
     from module import templateprocessor
     from common import ActionHandler
     from display import screenhandler
+    from utils import capture_screen, click_and_save_with_highlight
 except Exception as e:
     print(f"임포트 실패: {e}")
 
@@ -93,14 +95,6 @@ class ProcessStep:
         time.sleep(wait_time)
         return True
 
-        if window_name:
-            time.sleep(5)
-            screenhandler.focus_game_window(window_name)
-            log_manager.logger.info(f"창 포커스: {window_name}")
-
-        time.sleep(wait_time)
-        return True
-
     def execute_drag(self, step_name, drag, retry=10, window_name=None, wait_time=3):
         """
         드래그 동작을 수행하는 메서드
@@ -116,6 +110,8 @@ class ProcessStep:
             bool: 단계 수행 성공 여부
         """
         log_manager.logger.info(f"{step_name} 시작")
+
+        capture_screen()
 
         if isinstance(drag, dict):
             start = drag.get("start")
@@ -144,6 +140,7 @@ class ProcessStep:
             log_manager.logger.info(f"창 포커스: {window_name}")
 
         time.sleep(wait_time)
+        capture_screen()
         return True
 
     def execute_press_key(self, step_name, key, wait_time=1):
@@ -159,6 +156,8 @@ class ProcessStep:
             bool: 단계 수행 성공 여부
         """
         log_manager.logger.info(f"{step_name} 시작")
+        
+        capture_screen()
 
         try:
             self.action_handler.press_key(key)
@@ -168,6 +167,7 @@ class ProcessStep:
             return False
 
         time.sleep(wait_time)
+        capture_screen()
         return True
 
     def run_exception_scenario(self):

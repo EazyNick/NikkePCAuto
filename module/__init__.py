@@ -10,6 +10,7 @@ from .outpost.outpost import run as outpost_run
 from .shop.shop import run as shop_run
 from .mail.mail import run as mail_run
 from .ark.ark_trivetower import run as ark_trivetower_run
+from .ark.ark_simulation import run as ark_simulation_run
 from .favorite.favorite import run as favorite_run
 
 __all__ = ['templateprocessor',
@@ -21,4 +22,5 @@ __all__ = ['templateprocessor',
             'shop_run',
             'mail_run',
             'ark_trivetower_run',
+            'ark_simulation_run',
             'favorite_run',]
