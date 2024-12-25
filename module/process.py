@@ -43,7 +43,7 @@ class ProcessStep:
 
         Args:
             step_name (str): 단계 이름 (로그 출력용)
-            image_name_or_coords (str): 템플릿 이미지 파일명
+            image_name_or_coords (str or tuple): 템플릿 이미지 파일명 또는 클릭 좌표 (예: (x, y))
             double_click (bool): 더블 클릭 여부 (기본값: False)
             retry (int): 이미지 매칭 실패 시 재시도 횟수 (기본값: 10)
             window_name (str): 포커스할 창 이름 (기본값: None)
@@ -55,24 +55,43 @@ class ProcessStep:
         log_manager.logger.info(f"{step_name} 시작")
 
         try:
-            for attempt in range(retry):
-                template_path = os.path.join(self.base_path, image_name_or_coords)
+            if isinstance(image_name_or_coords, tuple):
+                # 좌표 클릭 처리
+                x, y = image_name_or_coords
                 if double_click:
-                    if templateprocessor.process_double_click(template_path):
-                        log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 더블 클릭 성공")
-                        break
+                    self.action_handler.double_click(x, y)
+                    log_manager.logger.info(f"{step_name} 완료: 좌표 ({x}, {y}) 더블 클릭 성공")
                 else:
-                    if templateprocessor.process_click(template_path):
-                        log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
-                        break
-                log_manager.logger.warning(f"{step_name}: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})")
-                time.sleep(1)
+                    self.action_handler.click(x, y)
+                    log_manager.logger.info(f"{step_name} 완료: 좌표 ({x}, {y}) 클릭 성공")
             else:
-                log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾지 못했습니다.")
-                return False
+                # 이미지 기반 클릭 처리
+                for attempt in range(retry):
+                    template_path = os.path.join(self.base_path, image_name_or_coords)
+                    if double_click:
+                        if templateprocessor.process_double_click(template_path):
+                            log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 더블 클릭 성공")
+                            break
+                    else:
+                        if templateprocessor.process_click(template_path):
+                            log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
+                            break
+                    log_manager.logger.warning(f"{step_name}: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})")
+                    time.sleep(1)
+                else:
+                    log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾지 못했습니다.")
+                    return False
         except Exception as e:
             log_manager.logger.warn(f"{step_name} 실패: {e}")
             return False
+
+        if window_name:
+            time.sleep(5)
+            screenhandler.focus_game_window(window_name)
+            log_manager.logger.info(f"창 포커스: {window_name}")
+
+        time.sleep(wait_time)
+        return True
 
         if window_name:
             time.sleep(5)
@@ -127,6 +146,30 @@ class ProcessStep:
         time.sleep(wait_time)
         return True
 
+    def execute_press_key(self, step_name, key, wait_time=1):
+        """
+        키 입력 동작을 수행하는 메서드
+
+        Args:
+            step_name (str): 단계 이름 (로그 출력용)
+            key (str or tuple): 입력할 키(예: 'a') 또는 키 조합 튜플(예: ('alt', 'f4')).
+            wait_time (int): 다음 단계로 넘어가기 전 대기 시간 (초, 기본값: 1)
+
+        Returns:
+            bool: 단계 수행 성공 여부
+        """
+        log_manager.logger.info(f"{step_name} 시작")
+
+        try:
+            self.action_handler.press_key(key)
+            log_manager.logger.info(f"{step_name}: Key pressed: {key}")
+        except Exception as e:
+            log_manager.logger.error(f"{step_name} 실패: 키 입력 중 오류 발생: {e}")
+            return False
+
+        time.sleep(wait_time)
+        return True
+
     def run_exception_scenario(self):
         """
         캐시 구매 팝업 발견 시 실행할 예외 처리 로직
@@ -166,5 +209,6 @@ if __name__ == "__main__":
         process_step.execute_click("8단계: 게임 접속", "h_ingame.png", retry=100, wait_time=20)
         process_step.execute_click("9단계: 공지사항 닫기", "i_btn_X.png", wait_time=1)
         process_step.execute_click("10단계: 추가 공지사항 닫기", "i_btn_X.png", retry=3, wait_time=1)
-
+        process_step.execute_press_key("1.5단계: Alt + Tab 전환", ("alt", "tab"), wait_time=1)
+        
     run()

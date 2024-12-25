@@ -45,7 +45,7 @@ def run():
     process_step.execute_click("6단계: 주간", "f_weekly.png", retry=1, wait_time=2)
     process_step.execute_click("7단계: 무료", "g_weeklyfree.png", retry=1, wait_time=2)
     process_step.execute_click("8단계: 터치하여 보상 수령", "h_exit.png", retry=1, wait_time=2)
-    process_step.execute_click("6단계: 나가기", "f_back.png", wait_time=3)
+    process_step.execute_click("9단계: 나가기", "i_back.png", wait_time=3)
 
 if __name__ == "__main__":
     run()
