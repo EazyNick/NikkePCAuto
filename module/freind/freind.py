@@ -34,8 +34,6 @@ def run():
 
     assets_login_path = path_manager.get_path("assets_freind")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("친구 자동화 프로세스를 시작합니다.")
-
     # 단계별 실행
     process_step.execute_click("1단계: 친구 목록 클릭", "a_freiend.png", wait_time=3)
     process_step.execute_click("2단계: 하트 보내기", "b_sendhart.png", wait_time=2)

@@ -33,7 +33,6 @@ def run():
 
     assets_login_path = path_manager.get_path("assets_ark")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("트라이브 타워 프로세스를 시작합니다.")
 
     process_step.execute_click("1단계: 방주 이동", "a_ark.png", wait_time=3)
     process_step.execute_click("2단계: 트라이브 타워", "b_trivetower.png", wait_time=3)

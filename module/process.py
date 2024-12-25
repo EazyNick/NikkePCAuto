@@ -62,21 +62,17 @@ class ProcessStep:
                 x, y = image_name_or_coords
                 if double_click:
                     self.action_handler.double_click(x, y)
-                    log_manager.logger.info(f"{step_name} 완료: 좌표 ({x}, {y}) 더블 클릭 성공")
                 else:
                     self.action_handler.click(x, y)
-                    log_manager.logger.info(f"{step_name} 완료: 좌표 ({x}, {y}) 클릭 성공")
             else:
                 # 이미지 기반 클릭 처리
                 for attempt in range(retry):
                     template_path = os.path.join(self.base_path, image_name_or_coords)
                     if double_click:
                         if templateprocessor.process_double_click(template_path):
-                            log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 더블 클릭 성공")
                             break
                     else:
                         if templateprocessor.process_click(template_path):
-                            log_manager.logger.info(f"{step_name} 완료: '{image_name_or_coords}' 아이콘 클릭 성공")
                             break
                     log_manager.logger.warning(f"{step_name}: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})")
                     time.sleep(1)
@@ -90,19 +86,18 @@ class ProcessStep:
         if window_name:
             time.sleep(5)
             screenhandler.focus_game_window(window_name)
-            log_manager.logger.info(f"창 포커스: {window_name}")
 
         time.sleep(wait_time)
         return True
 
-    def execute_drag(self, step_name, drag, retry=10, window_name=None, wait_time=3):
+    def execute_drag(self, step_name, drag, repeat=1, window_name=None, wait_time=3):
         """
         드래그 동작을 수행하는 메서드
 
         Args:
             step_name (str): 단계 이름 (로그 출력용)
             drag (dict): 드래그 동작 설정 {"start": (x1, y1), "end": (x2, y2), "duration": float}
-            retry (int): 드래그 실패 시 재시도 횟수 (기본값: 10)
+            repeat (int): 드래그 반복 횟수 (기본값: 1)
             window_name (str): 포커스할 창 이름 (기본값: None)
             wait_time (int): 다음 단계로 넘어가기 전 대기 시간 (초, 기본값: 3)
 
@@ -118,18 +113,13 @@ class ProcessStep:
             end = drag.get("end")
             duration = drag.get("duration", 0.5)
             if start and end:
-                for attempt in range(retry):
+                for attempt in range(repeat):
                     try:
-                        log_manager.logger.info(f"{step_name}: 드래그 수행 {start} -> {end} (duration: {duration}s)")
                         self.action_handler.drag(start[0], start[1], end[0], end[1], duration)
                         time.sleep(2)
-                        break
                     except Exception as e:
-                        log_manager.logger.warning(f"{step_name}: 드래그 실패, 재시도 중... ({attempt + 1}/{retry}) - {e}")
-                        time.sleep(1)
-                else:
-                    log_manager.logger.error(f"{step_name} 실패: 드래그 동작을 수행할 수 없습니다.")
-                    return False
+                        log_manager.logger.error(f"{step_name} 실패: 드래그 동작 중 오류 발생 - {e}")
+                        return False
             else:
                 log_manager.logger.warning(f"{step_name}: 잘못된 drag 설정으로 무시됨: {drag}")
                 return False
@@ -137,7 +127,6 @@ class ProcessStep:
         if window_name:
             time.sleep(5)
             screenhandler.focus_game_window(window_name)
-            log_manager.logger.info(f"창 포커스: {window_name}")
 
         time.sleep(wait_time)
         capture_screen()
@@ -161,7 +150,6 @@ class ProcessStep:
 
         try:
             self.action_handler.press_key(key)
-            log_manager.logger.info(f"{step_name}: Key pressed: {key}")
         except Exception as e:
             log_manager.logger.error(f"{step_name} 실패: 키 입력 중 오류 발생: {e}")
             return False

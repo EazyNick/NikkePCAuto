@@ -33,7 +33,6 @@ def run():
 
     assets_login_path = path_manager.get_path("assets_ark")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("시뮬레이션 룸 프로세스를 시작합니다.")
 
     process_step.execute_click("1단계: 방주 이동", "a_ark.png", wait_time=3)
     process_step.execute_click("2단계: 시뮬레이션 룸", "b_simulationroom.png", wait_time=3)

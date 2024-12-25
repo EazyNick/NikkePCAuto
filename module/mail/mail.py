@@ -34,7 +34,6 @@ def run():
 
     assets_login_path = path_manager.get_path("assets_mail")
     process_step = ProcessStep(base_path=assets_login_path)
-    log_manager.logger.info("우편 받기 프로세스를 시작합니다.")
 
     # 단계별 실행
     process_step.execute_click("1단계: 우편", "a_mail.png", wait_time=3)

@@ -38,11 +38,12 @@ def capture_screen():
 
     # 현재 시간으로 파일 이름 설정
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    file_path = os.path.join(temp_dir, f"screenshot_{timestamp}.png")
+    file_name = f"screenshot_{timestamp}.png"
+    file_path = os.path.join(temp_dir, file_name)
 
     # 캡처한 이미지를 저장
     screenshot.save(file_path)
-    log_manager.logger.info(f"화면 캡처가 저장되었습니다: {file_path}")
+    log_manager.logger.debug(f"화면 캡처가 저장되었습니다: {file_name}")
 
     # 저장된 파일이 30장 이상일 경우 삭제
     clean_up_temp_files(temp_dir)
@@ -93,11 +94,12 @@ def click_and_save_with_highlight(coords):
 
     # 새 파일 이름 설정
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    new_file_path = os.path.join(temp_dir, f"highlighted_{timestamp}.png")
+    file_name = f"highlighted_{timestamp}.png"
+    new_file_path = os.path.join(temp_dir, file_name)
 
     # 강조된 이미지를 저장
     cv2.imwrite(new_file_path, image)
-    log_manager.logger.info(f"좌표가 지정된 스크린샷이 저장되었습니다: {new_file_path}")
+    log_manager.logger.debug(f"좌표가 지정된 스크린샷이 저장되었습니다: {file_name}")
 
     return new_file_path
 

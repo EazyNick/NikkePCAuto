@@ -28,8 +28,6 @@ def run():
     assets_login_path = path_manager.get_path("assets_login")
     process_step = ProcessStep(base_path=assets_login_path)
 
-    log_manager.logger.info("로그인 자동화 프로세스를 시작합니다.")
-
     # 단계별 실행
     process_step.execute_click("1단계: 니케 아이콘 클릭", "a_icon.png", double_click=True, wait_time=1)
     process_step.execute_click("2단계: 구글 로그인", "b_google.png", window_name="로그인 - Google 계정 - Chrome", wait_time=1)
