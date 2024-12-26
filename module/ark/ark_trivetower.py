@@ -46,6 +46,9 @@ def run():
 
     if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
         process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+    if process_step.execute_click("5단계: 전투진입", "e_outgame.png", retry=1, wait_time=3):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+    else:
         process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
@@ -54,7 +57,10 @@ def run():
 
     if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
         process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
-        process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
+    if process_step.execute_click("5단계: 전투진입", "e_outgame.png", retry=1, wait_time=3):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+    else:
+        process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=3)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
         process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
@@ -62,10 +68,14 @@ def run():
     
     if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
         process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+    if process_step.execute_click("5단계: 전투진입", "e_outgame.png", retry=1, wait_time=3):
+        process_step.execute_click("4단계: 시작", (1246, 620), retry=1, wait_time=2)
+    else:
         process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
         process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
         process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+        process_step.execute_click("8단계: 뒤로가기", "h_back.png", wait_time=3)
         process_step.execute_click("8단계: 뒤로가기", "h_back", wait_time=3)
     process_step.execute_click("8단계: 홈", "i_home.png", wait_time=3)
 

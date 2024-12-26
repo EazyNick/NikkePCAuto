@@ -12,6 +12,7 @@ from .mail.mail import run as mail_run
 from .ark.ark_trivetower import run as ark_trivetower_run
 from .ark.ark_simulation import run as ark_simulation_run
 from .favorite.favorite import run as favorite_run
+from .stagingarea.stagingarea_mission import run as stagingarea_mission_run
 
 __all__ = ['templateprocessor',
             'ProcessStep',
@@ -23,4 +24,5 @@ __all__ = ['templateprocessor',
             'mail_run',
             'ark_trivetower_run',
             'ark_simulation_run',
-            'favorite_run',]
+            'favorite_run',
+            'stagingarea_mission_run',]

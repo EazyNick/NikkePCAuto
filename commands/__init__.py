@@ -7,3 +7,4 @@ from .shop_command import ShopCommand
 from .mail_command import MailCommand
 from .ark_command import ArkCommand
 from .favorite_command import Favoritecommand
+from .stagingarea_command import StagingAreaCommand
