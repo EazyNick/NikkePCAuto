@@ -55,7 +55,8 @@ class ProcessStep:
             bool: 단계 수행 성공 여부
         """
         log_manager.logger.info(f"{step_name} 시작")
-
+        if self.run_exception_scenario():
+            time.sleep(0.1)
         try:
             if isinstance(image_name_or_coords, tuple):
                 # 좌표 클릭 처리
@@ -67,25 +68,42 @@ class ProcessStep:
             else:
                 # 이미지 기반 클릭 처리
                 for attempt in range(retry):
-                    template_path = os.path.join(self.base_path, image_name_or_coords)
-                    if double_click:
-                        if templateprocessor.process_double_click(template_path):
-                            break
-                    else:
-                        if templateprocessor.process_click(template_path):
-                            break
-                    log_manager.logger.warning(f"{step_name}: '{image_name_or_coords}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})")
+                    template_paths = [
+                        os.path.join(self.base_path, image_name_or_coords)
+                    ]
+                    for i in range(1, 4):
+                        template_paths.append(
+                            os.path.join(
+                                self.base_path, f"{os.path.splitext(image_name_or_coords)[0]}{i}.png"
+                            )
+                        )
+                    base_name, ext = os.path.splitext(image_name_or_coords)
+                    for i, template_path in enumerate(template_paths):
+                        if os.path.exists(template_path):
+                            if double_click:
+                                if templateprocessor.process_double_click(template_path):
+                                    return True
+                            else:
+                                if templateprocessor.process_click(template_path):
+                                    return True
+                            log_manager.logger.warning(
+                            f"{step_name}: '{base_name}{'' if i == 0 else str(i)}{ext}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})"
+                        )
+                        else:
+                            pass
+                    log_manager.logger.error(
+                        f"{step_name} 실패: '{base_name}{'' if i == 0 else str(i)}{ext}' 아이콘을 찾지 못했습니다."
+                    )
                     time.sleep(1)
-                else:
-                    log_manager.logger.error(f"{step_name} 실패: '{image_name_or_coords}' 아이콘을 찾지 못했습니다.")
-                    return False
+                return False
+            time.sleep(wait_time)
         except Exception as e:
             log_manager.logger.warn(f"{step_name} 실패: {e}")
             return False
 
         if window_name:
             time.sleep(5)
-            screenhandler.focus_game_window(window_name)
+            self.action_handler.focus_game_window(window_name)
 
         time.sleep(wait_time)
         return True

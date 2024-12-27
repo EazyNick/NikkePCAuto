@@ -18,7 +18,7 @@ class PathManager:
             "assets_mail": os.path.join(self.project_root, "assets", "mail"),
             "assets_outpost": os.path.join(self.project_root, "assets", "outpost"),
             "assets_shop": os.path.join(self.project_root, "assets", "shop"),
-            "assets_stagingarea": os.path.join(self.project_root, "stagingarea"),
+            "assets_stagingarea": os.path.join(self.project_root, "assets", "stagingarea"),
             "assets_temp": os.path.join(self.project_root, "assets", "temp"),
             "assets_test": os.path.join(self.project_root, "assets", "test"),
             "commands": os.path.join(self.project_root, "commands"),
