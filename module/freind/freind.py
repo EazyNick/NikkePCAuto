@@ -37,7 +37,7 @@ def run():
     # 단계별 실행
     process_step.execute_click("1단계: 친구 목록 클릭", "a_freiend.png", wait_time=3)
     process_step.execute_click("2단계: 하트 보내기", "b_sendhart.png", wait_time=2)
-    process_step.execute_click("3단계: 확인", "c_ok.png", wait_time=2)
+    process_step.execute_click("3단계: 확인", "c_ok.png", retry=3, wait_time=2)
     process_step.execute_click("4단계: 나가기", "d_exit.png", wait_time=2)
 
 if __name__ == "__main__":

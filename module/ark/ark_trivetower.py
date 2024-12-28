@@ -41,7 +41,7 @@ def run():
     process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=60, wait_time=50)
     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
-    process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=60, wait_time=3)
+    process_step.execute_click("7단계: 나가기1", "g_exit.png", retry=120, wait_time=3)
     process_step.execute_click("8단계: 뒤로가기", "h_back.png", wait_time=3)
 
     if process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", retry=6, wait_time=6):
