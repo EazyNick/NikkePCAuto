@@ -38,6 +38,11 @@ def run():
     process_step.execute_click("7.1단계: 페이지 닫기", "h_btn_X.png", retry=100, wait_time=60)
     process_step.execute_click("8단계: 게임 접속", "h_ingame.png", retry=100, wait_time=20)
     process_step.execute_click("9단계: 공지사항 닫기", "i_btn_X.png", wait_time=1)
+
+    process_step.execute_click("10단계: 이벤트 모두 받기", "i_event_getall.png", retry=3, wait_time=1)
+    process_step.execute_click("10단계: 이벤트 모두 받기", "j_event_exit.png", retry=3, wait_time=1)
+    process_step.execute_click("10단계: 이벤트 모두 받기", "k_event_ba ck.png", retry=3, wait_time=1)
+
     process_step.execute_click("10단계: 추가 공지사항 닫기", "i_btn_X.png", retry=3, wait_time=1)
 
     # 추가 동작: 게임 창 포커스 및 크기 조정
