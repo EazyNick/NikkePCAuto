@@ -82,9 +82,17 @@ class ProcessStep:
                         if os.path.exists(template_path):
                             if double_click:
                                 if templateprocessor.process_double_click(template_path):
+                                    if window_name:
+                                        time.sleep(3)
+                                        screenhandler.focus_game_window(window_name)
+                                    time.sleep(wait_time)
                                     return True
                             else:
                                 if templateprocessor.process_click(template_path):
+                                    if window_name:
+                                        time.sleep(3)
+                                        screenhandler.focus_game_window(window_name)
+                                    time.sleep(wait_time)
                                     return True
                             log_manager.logger.warning(
                             f"{step_name}: '{base_name}{'' if i == 0 else str(i)}{ext}' 아이콘을 찾을 수 없습니다. 재시도 중... ({attempt + 1}/{retry})"
@@ -100,12 +108,6 @@ class ProcessStep:
         except Exception as e:
             log_manager.logger.warn(f"{step_name} 실패: {e}")
             return False
-
-        if window_name:
-            time.sleep(5)
-            self.action_handler.focus_game_window(window_name)
-
-        time.sleep(wait_time)
         return True
 
     def execute_drag(self, step_name, drag, repeat=1, window_name=None, wait_time=3):
