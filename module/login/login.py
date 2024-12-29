@@ -41,7 +41,7 @@ def run():
 
     process_step.execute_click("10단계: 이벤트 모두 받기", "i_event_getall.png", retry=3, wait_time=1)
     process_step.execute_click("10단계: 이벤트 모두 받기", "j_event_exit.png", retry=3, wait_time=1)
-    process_step.execute_click("10단계: 이벤트 모두 받기", "k_event_ba ck.png", retry=3, wait_time=1)
+    process_step.execute_click("10단계: 이벤트 모두 받기", "k_event_back.png", retry=3, wait_time=1)
 
     process_step.execute_click("10단계: 추가 공지사항 닫기", "i_btn_X.png", retry=3, wait_time=1)
 

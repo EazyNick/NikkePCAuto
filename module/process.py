@@ -83,14 +83,14 @@ class ProcessStep:
                             if double_click:
                                 if templateprocessor.process_double_click(template_path):
                                     if window_name:
-                                        time.sleep(3)
+                                        time.sleep(5)
                                         screenhandler.focus_game_window(window_name)
                                     time.sleep(wait_time)
                                     return True
                             else:
                                 if templateprocessor.process_click(template_path):
                                     if window_name:
-                                        time.sleep(3)
+                                        time.sleep(5)
                                         screenhandler.focus_game_window(window_name)
                                     time.sleep(wait_time)
                                     return True
