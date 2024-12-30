@@ -83,12 +83,15 @@ main.py 실행 (현재는 V000_main.py 실행)
 
 ## **프로세스 요약**  
 1. login - 아이콘 클릭 > 구글 로그인 > 게임 시작 (이거는 제 개인 화면에 맞춰져 있어서, 주석처리 필요)
-- V000_mian.py 70번째 줄 'automation.register_command("login", LoginCommand())' 주석처리 부탁드립니다.
+- V000_mian.py 70번째 줄 'automation.register_command("login", LoginCommand())' 주석처리 부탁드립니다. <br>
+
 2. 일일 출석 - 알림 > 일일 보상 > 100P 받기 및 출석체크
 3. 친구 목록 > 하트 보내기
 4. 일일 전투 보상 흭득 > 단기 섬멸 1회 진행
 5. 상점 > 일일 무료 흭득
 5. 우편함 받기
+[![홈 화면](git/img/home.png)](https://www.youtube.com/watch?v=ot94f_7yCIQ)
+<br>
 6. 방주 트라이브 타워
 7. 니케 상담
 
