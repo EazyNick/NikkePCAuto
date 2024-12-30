@@ -61,7 +61,7 @@ venv\Scripts\activate
 
 # 가상환경 활성화 (Mac/Linux)
 source venv/bin/activate
-``
+```
 
 ### **3. 의존성 패키지 설치**  
 프로그램 실행에 필요한 패키지를 설치합니다:
