@@ -89,9 +89,8 @@ main.py 실행 (현재는 V000_main.py 실행)
 3. 친구 목록 > 하트 보내기
 4. 일일 전투 보상 흭득 > 단기 섬멸 1회 진행
 5. 상점 > 일일 무료 흭득
-5. 우편함 받기 
+5. 우편함 받기 <br>
 <사진 클릭 시 TEST 영상으로 이동>
-<br>
 [![홈 화면](git/img/home.png)](https://www.youtube.com/watch?v=ot94f_7yCIQ)
 <br>
 6. 방주 트라이브 타워
