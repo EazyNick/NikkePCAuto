@@ -35,8 +35,13 @@ def run():
     process_step.execute_click("4단계: 계속", "d_keep_going.png", wait_time=2)
     process_step.execute_click("6단계: 웹페이지 종료", "f_exit.png", window_name="NIKKE", wait_time=1)
     process_step.execute_click("7단계: 게임 시작", "g_gamestart.png", window_name="NIKKE", wait_time=10)
-    process_step.execute_click("7.1단계: 페이지 닫기", "h_btn_X.png", retry=100, wait_time=60)
-    process_step.execute_click("8단계: 게임 접속", "h_ingame.png", retry=100, wait_time=20)
+    # 추가 동작: 게임 창 포커스 및 크기 조정
+    screenhandler.resize_game_window('NIKKE', 2200, 1300)
+    time.sleep(0.1)
+    screenhandler.focus_game_window('NIKKE')
+    time.sleep(1)
+    process_step.execute_click("7.1단계: 페이지 닫기", "h_btn_X.png", retry=20, wait_time=30)
+    process_step.execute_click("8단계: 게임 접속", "h_ingame.png", retry=100, wait_time=15)
     process_step.execute_click("9단계: 공지사항 닫기", "i_btn_X.png", wait_time=1)
 
     process_step.execute_click("10단계: 이벤트 모두 받기", "i_event_getall.png", retry=3, wait_time=1)
