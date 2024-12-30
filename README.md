@@ -74,7 +74,7 @@ pip install -r requirements.txt
 1. 바탕화면 우클릭 디스플레이 설정 > 배율 100%, 해상도 2560 X 1440 사용 
 ```
 python main.py
-=main.py 실행 (현재는 V000_main.py 실행)
+=main.py 실행
 ```
 #### **예상 동작**  
 1. 게임 화면을 캡처합니다.  
