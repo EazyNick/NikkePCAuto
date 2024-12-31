@@ -87,8 +87,8 @@ if __name__ == "__main__":
     # automation.register_command("shop", ShopCommand())
     # automation.register_command("stagingarea", StagingAreaCommand())
     # automation.register_command("outpost", OutpostCommand())    
-    automation.register_command("ark", ArkCommand())
-    # automation.register_command("favorite", Favoritecommand())
+    # automation.register_command("ark", ArkCommand())
+    automation.register_command("favorite", Favoritecommand())
     
 
     # 자동화 시작
