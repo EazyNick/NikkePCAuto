@@ -40,7 +40,7 @@ def run():
     time.sleep(0.1)
     screenhandler.focus_game_window('NIKKE')
     time.sleep(1)
-    process_step.execute_click("7.1단계: 페이지 닫기", "h_btn_X.png", retry=20, wait_time=30)
+    process_step.execute_click("7.1단계: 페이지 닫기", "h_btn_X.png", retry=50, wait_time=40)
     process_step.execute_click("8단계: 게임 접속", "h_ingame.png", retry=100, wait_time=15)
     process_step.execute_click("9단계: 공지사항 닫기", "i_btn_X.png", wait_time=1)
 
