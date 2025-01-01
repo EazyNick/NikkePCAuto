@@ -67,27 +67,27 @@ class NikkeAutomation:
 if __name__ == "__main__":
     import subprocess
 
-    git_manager = GitManager()
-    pull_strategy = PullStrategy()
+    # git_manager = GitManager()
+    # pull_strategy = PullStrategy()
 
-    try:
-        pull_strategy.sync(git_manager)
-        print("레포지토리 동기화 성공!")
-    except Exception as e:
-        log_manager.logger.error(f"레포지토리 동기화 실패: {e}")
+    # try:
+    #     pull_strategy.sync(git_manager)
+    #     print("레포지토리 동기화 성공!")
+    # except Exception as e:
+    #     log_manager.logger.error(f"레포지토리 동기화 실패: {e}")
 
     # NikkeAutomation 클래스 인스턴스 생성
     automation = NikkeAutomation()
 
     # 커맨드 등록
     # automation.register_command("login", LoginCommand())
-    automation.register_command("dailycheck", DailycheckCommand())
-    automation.register_command("freinds", FreindCommand())
-    automation.register_command("mail", MailCommand())
-    automation.register_command("shop", ShopCommand())
-    automation.register_command("stagingarea", StagingAreaCommand())
-    automation.register_command("outpost", OutpostCommand())    
-    automation.register_command("ark", ArkCommand())
+    # automation.register_command("dailycheck", DailycheckCommand())
+    # automation.register_command("freinds", FreindCommand())
+    # automation.register_command("mail", MailCommand())
+    # automation.register_command("shop", ShopCommand())
+    # automation.register_command("stagingarea", StagingAreaCommand())
+    # automation.register_command("outpost", OutpostCommand())    
+    # automation.register_command("ark", ArkCommand())
     automation.register_command("favorite", Favoritecommand())
     
 
