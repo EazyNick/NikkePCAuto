@@ -48,7 +48,12 @@ def run():
     process_step.execute_click("10단계: 이벤트 모두 받기", "j_event_exit.png", retry=3, wait_time=1)
     process_step.execute_click("10단계: 이벤트 모두 받기", "k_event_back.png", retry=3, wait_time=1)
 
-    process_step.execute_click("10단계: 추가 공지사항 닫기", "i_btn_X.png", retry=3, wait_time=1)
+    for i in range(3):
+        process_step.execute_click("11단계: 이벤트 뽑기", "l_event.png", wait_time=5)
+        process_step.execute_click("11단계: 리워드 흭득", "m_event.png", wait_time=2)
+    process_step.execute_click("11단계: 터치하여 닫기", "n_event_exit.png", retry=3, wait_time=1)
+
+    process_step.execute_click("12단계: 추가 공지사항 닫기", "i_btn_X.png", retry=3, wait_time=1)
 
     # 추가 동작: 게임 창 포커스 및 크기 조정
     screenhandler.resize_game_window('NIKKE', 2200, 1300)

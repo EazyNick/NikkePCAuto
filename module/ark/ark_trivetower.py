@@ -39,7 +39,7 @@ def run():
     process_step.execute_click("3단계: 열린 타워로 이동", "c_dailyclear.png", wait_time=3)
     process_step.execute_click("4단계: 시작", (1246, 620), wait_time=2)
     process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=60, wait_time=50)
-    process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
+    # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
     # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
@@ -52,7 +52,7 @@ def run():
             pass
         else:
             process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
-            process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
+            # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
             process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
             # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
             process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
@@ -65,7 +65,7 @@ def run():
                 pass
             else:
                 process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=3)
-                process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
+                # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
                 process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
                 # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
                 process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
@@ -78,7 +78,7 @@ def run():
                     pass
                 else:
                     process_step.execute_click("5단계: 전투진입", "e_ingame.png", retry=1, wait_time=50)
-                    process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
+                    # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
                     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
                     # process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=3, wait_time=3)
                     process_step.execute_click("6단계: 다음 스테이지", "f_nextstage.png", retry=60, wait_time=50)
