@@ -39,17 +39,20 @@ def run():
     process_step.execute_click("2단계: 상담", "b_dialogue.png", wait_time=3)
     process_step.execute_click("3단계: 시작", "c_picknikke.png", retry=3, wait_time=2)
     for i in range(10):
-        if process_step.execute_click(f"4단계: 간편상담 ({i+1})", "d_simpledialogue.png", retry=3, wait_time=3):
+        if process_step.execute_click(f"4단계: 간편상담 ({i+1})", "d_simpledialogue.png", retry=3, wait_time=2):
             process_step.execute_click(f"5단계: 확인 ({i+1})", "e_ok.png", retry=3, wait_time=2)
-            process_step.execute_click(f"6단계: 터치하여 나가기 ({i+1})", "f_next.png", retry=1, wait_time=2)
+            process_step.execute_click(f"6단계: 터치하여 나가기 ({i+1})", "f_next.png", retry=2, wait_time=1)
             process_step.execute_click(f"6단계: 터치하여 나가기 ({i+1})", "f_next.png", retry=3, wait_time=2)
             process_step.execute_click(f"7단계: 다음 니케 ({i+1})", "g_next.png", retry=3, wait_time=2)
         else:
             process_step.execute_click(f"4단계: 상담하기 ({i+1})", "d_dialogue.png", retry=3, wait_time=3)
             process_step.execute_click(f"5단계: 확인 ({i+1})", "e_ok.png", retry=3, wait_time=2)
             process_step.execute_click(f"6단계: 자동 대화 ({i+1})", "f_auto.png", wait_time=2)
-            while process_step.execute_click(f"6단계: 1번 선택지", "g_1st.png", retry=1, wait_time=20) or process_step.execute_click(f"6단계: 2번 선택지", "g_2st.png", retry=1, wait_time=20):
+            temp = 0
+            while process_step.execute_click(f"6단계: 1번 선택지", "g_1st.png", retry=1, wait_time=20) or process_step.execute_click(f"6단계: 2번 선택지", "g_2st.png", retry=1, wait_time=20) or temp == 20:
                 time.sleep(1)
+                temp += 1
+            process_step.execute_click(f"7단계: 다음 니케 ({i+1})", "g_next.png", retry=3, wait_time=2)
     process_step.execute_click("8단계: 뒤로가기", "h_back.png", retry=3, wait_time=2)
     process_step.execute_click("9단계: 홈", "i_home.png", retry=3, wait_time=2)
 

@@ -116,8 +116,12 @@ python main.py
 ---
 
 ## 7. 방주 트라이브 타워 진행
+[![방주 트라이브 타워](git/img/trivetower.png)](https://www.youtube.com/watch?v=ppURuloPBlQ) 
+
+---
 
 ## 8. 니케 상담
+[![홈 화면](git/img/favorite.png)](https://www.youtube.com/watch?v=6j2ovdJzkmM) 
 
 ---
 
